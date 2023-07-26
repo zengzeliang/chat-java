@@ -88,7 +88,6 @@ public class ChatController {
     }
 
 
-
         // 加载
     @GetMapping("/loadChats")
     @CrossOrigin
@@ -103,7 +102,7 @@ public class ChatController {
             result.put("message", "用户校验失败");
             return result;
         }
-        log.info("{}进入loadChats", userId);
+        log.info("userId: [{}]进入loadChats", userId);
 
         // 获取用户所有的chat channel
         String selectedChannelId = (String) redisTemplate.opsForValue().get(USER_SELECT_CHANNEL_PREFIX + userId);
@@ -147,7 +146,7 @@ public class ChatController {
     @GetMapping("/newChat")
     @CrossOrigin
     public Object newChat(String name, String userId){
-        log.info("进入newChat name: [{}], userId: [{}]", name, userId);
+        log.info("userId: [{}]进入newChat name: [{}]", userId, name);
         Map<String, Object> result = new HashMap<>();
 
         // 用户校验不通过
@@ -178,7 +177,7 @@ public class ChatController {
     @GetMapping("/selectChat")
     @CrossOrigin
     public Object selectChat(String userId, String id) {
-        log.info("selectChat userId: [{}]", userId);
+        log.info("userId: [{}]进入selectChat ", userId);
         Map<String, Object> result = new HashMap<>();
 
         if(!checkUser(userId)){
@@ -197,7 +196,7 @@ public class ChatController {
     @GetMapping("/loadHistory")
     @CrossOrigin
     public Object loadHistory(String userId){
-        log.info("loadHistory userId: [{}]", userId);
+        log.info("userId: [{}]进入loadHistory ", userId);
         Map<String, Object> result = new HashMap<>();
 
         // 用户校验不通过
@@ -223,9 +222,9 @@ public class ChatController {
     @PostMapping("/setUserId")
     @CrossOrigin
     public Object userId(@RequestBody Map<String, Object> param) {
-        log.info("进入setUserId, {}", param);
-
         String userId = (String) param.get("userId");
+
+        log.info("进入setUserId, {}", param);
 
         if(Strings.isEmpty(userId)){
             Map<String, Object> result = new HashMap<>();
@@ -264,6 +263,8 @@ public class ChatController {
         }
         // 默认channel不能删除，获取当前选择的channel
         String channelId = (String) redisTemplate.opsForValue().get(USER_SELECT_CHANNEL_PREFIX + userId);
+
+        log.info("userId: [{}] channelId: [{}]进入deleteHistory", userId, channelId);
 
         if(DEFAULT_CHANNEL_ID.equals(channelId)){
             // 是默认channel 只清空聊天记录
@@ -313,8 +314,7 @@ public class ChatController {
         String prompt = (String) param.get("content");
 
         String clientIP = getClientIP(request);
-        log.info("user[{}], ip[{}]进入sseChat", userId, clientIP);
-        log.info("{}进入sseChat channelId: {}: question: {}, param: {}", userId, channelId, prompt, param);
+        log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, param);
 
         if (!checkUser(userId)) {
             return "error";
@@ -331,7 +331,7 @@ public class ChatController {
                 // 回答完成，可以做一些事情
                 sseEmitter.complete();
                 // 记录用户问题以及给出的消息
-                log.info("{}，{}回答完成: {}", param.get("userId"), channelId, msg);
+                log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, msg);
                 return;
             });
             initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
@@ -409,7 +409,7 @@ public class ChatController {
             recordMessageInfo(userId, channelId, prompt, RecordMessageTypeEnum.USER_TYPE);
             recordMessageInfo(userId, channelId, msg, RecordMessageTypeEnum.ASSISTANT);
 
-            log.info("{}，{}回答完成: {}", param.get("userId"), channelId, msg);
+            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, msg);
             return;
         });
         initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
