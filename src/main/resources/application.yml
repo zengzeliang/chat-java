@@ -1,6 +1,6 @@
 gpt:
   apiKeys:
-    - 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
+    - 12345
   maxPreContextNum:
     10
   proxyType: #代理类型
