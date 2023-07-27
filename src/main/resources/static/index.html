@@ -442,6 +442,7 @@
     </style>
     <script src="./static/js/jquery.min.js"></script>
     <script src="./static/js/marked.min.js"></script>
+    <script type="text/javascript" src="static/js/image.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/a11y-dark.min.css">
@@ -621,11 +622,11 @@
             </div>
             <div class="head-right">
                 <div class="head-btns">
-                    <a href="email.html">
-                        <div class="toggle-btn" id = "toggle-email-btn">
-                            <img class="svg-icon" viewBox="-2 -2 20 20" src="static/email.svg"/>
-                        </div>
-                    </a>
+<!--                    <a href="email.html">-->
+<!--                        <div class="toggle-btn" id = "toggle-email-btn">-->
+<!--                            <img class="svg-icon" viewBox="-2 -2 20 20" src="static/email.svg"/>-->
+<!--                        </div>-->
+<!--                    </a>-->
                     <div class="toggle-btn" id="toggle-chats-btn">
                         <svg class="svg-icon" viewBox="0 0 20 20">
                             <path d="M10,1.445c-4.726,0-8.555,3.829-8.555,8.555c0,4.725,3.829,8.555,8.555,8.555c4.725,0,8.555-3.83,8.555-8.555C18.555,5.274,14.725,1.445,10,1.445 M10,17.654c-4.221,0-7.654-3.434-7.654-7.654c0-4.221,3.433-7.654,7.654-7.654c4.222,0,7.654,3.433,7.654,7.654C17.654,14.221,14.222,17.654,10,17.654 M14.39,10c0,0.248-0.203,0.45-0.45,0.45H6.06c-0.248,0-0.45-0.203-0.45-0.45s0.203-0.45,0.45-0.45h7.879C14.187,9.55,14.39,9.752,14.39,10 M14.39,12.702c0,0.247-0.203,0.449-0.45,0.449H6.06c-0.248,0-0.45-0.202-0.45-0.449c0-0.248,0.203-0.451,0.45-0.451h7.879C14.187,12.251,14.39,12.454,14.39,12.702 M14.39,7.298c0,0.248-0.203,0.45-0.45,0.45H6.06c-0.248,0-0.45-0.203-0.45-0.45s0.203-0.45,0.45-0.45h7.879C14.187,6.848,14.39,7.051,14.39,7.298"></path>
@@ -644,9 +645,9 @@
         <div class="input-area">
             <textarea name="text" id="textarea"></textarea>
             <div class="button-area">
-                <button id="image-btn" class="talk_sub">生成图片</button>
                 <button id="stop-btn" class="talk_sub" style="display: none">停止生成</button>
                 <button id="del-btn" class="talk_sub">删除聊天记录</button>
+                <button id="image-btn" class="talk_sub">生成图片</button>
                 <button id="chmod-btn" class="talk_sub">当前为普通对话</button>
                 <button id="send-btn" class="talk_sub">发 送</button>
             </div>
@@ -686,6 +687,9 @@
     }
     // let baseUrl = "http://localhost:8081";
     let baseUrl = "";
+    // let baseUrl = "http://82.156.167.18:2023";
+    let imageUrl = "http://82.156.167.18:9298";
+
 
     // 当鼠标移动到 bubble-left时显示复制按钮
     $(document).on("mouseover", ".bubble-left", function () {
@@ -1384,8 +1388,62 @@
         }
         $("#stop-btn").hide();
     });
+
+
     $("#image-btn").click(function (){
-        genimage()
+        console.log("click")
+        var text = $("#textarea").val();
+        console.log("text");
+        console.log(text);
+        if (text == "") {
+            alert("请输入内容");
+            return;
+        }
+        let html = ''
+        html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + marked.marked(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
+        $(".content").append(html);
+        $("#textarea").val("");
+        $(".content").scrollTop($(".content")[0].scrollHeight);
+
+        let headers = createHeaders();
+        headers["Content-Type"] = "application/json";
+
+        let chat_item = $('<div class="item item-left"><div class="avatar"><img src="static/chatgpt.png" /></div><div class="bubble bubble-left markdown">正在等待回复</div></div>')
+        $(".content").append(chat_item);
+        $(".content").scrollTop($(".content")[0].scrollHeight);
+
+        getSelectedChatInfo().messages_total += 1;
+        renderHeadInfo();
+        const data = {};
+        data["msg"] = text;
+        $("#stop-btn").show();
+        returnMessageAjax = $.ajax({
+            url: imageUrl + "/image",
+            data: JSON.stringify(data),
+            headers: headers,
+            type: "Post",
+            dataType: "text",
+            timeout: 1000 * 60 * 2,
+
+            success: function (response) {
+                response = JSON.parse(response);
+                if (status === 'timeout') {
+                    alert("请求超时");
+                }
+                let div =  document.createElement('div');
+                const responseUrl = response.data[0].url;
+                div.innerHTML = marked.marked("<img src = '" + responseUrl + "'/>");
+                chat_item.find(".bubble").empty();
+                chat_item.find(".bubble").append(div);
+                $(".content").scrollTop($(".content")[0].scrollHeight);
+
+                $("#stop-btn").hide();
+                // getSummarize();
+                getSelectedChatInfo().messages_total += 1;
+                renderHeadInfo();
+            }
+        });
+
     });
     $("#textarea").keydown(function (e) {
         if (e.keyCode === 13 && !e.shiftKey) {
@@ -1426,5 +1484,4 @@
         $(".content").scrollTop($(".content")[0].scrollHeight);
     });
 </script>
-<script type="text/javascript" src="image.js"></script>
 </html>

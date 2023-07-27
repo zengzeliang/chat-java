@@ -1,15 +1,23 @@
-2023-07-26 22:24:53.811  INFO 33416 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 15.0.1 on ZELIANGZENG-MB7 with PID 33416 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-26 22:24:53.817  INFO 33416 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-26 22:24:54.557  INFO 33416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-26 22:24:54.560  INFO 33416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-26 22:24:54.588  INFO 33416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
-2023-07-26 22:24:54.690  WARN 33416 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.brother.chatgpt]' package. Please check your configuration.
-2023-07-26 22:24:56.367  INFO 33416 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-26 22:24:56.866  INFO 33416 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 3.568 seconds (JVM running for 4.797)
-2023-07-26 22:26:58.280  INFO 33591 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 15.0.1 on ZELIANGZENG-MB7 with PID 33591 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-26 22:26:58.284  INFO 33591 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-26 22:26:58.821  INFO 33591 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-26 22:26:58.823  INFO 33591 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-26 22:26:58.842  INFO 33591 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2023-07-26 22:27:00.202  INFO 33591 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-26 22:27:00.509  INFO 33591 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 2.608 seconds (JVM running for 3.573)
+2023-07-27 14:18:24.419  INFO 49954 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 15.0.1 on ZELIANGZENG-MB7 with PID 49954 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-27 14:18:24.424  INFO 49954 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-27 14:18:25.107  INFO 49954 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-27 14:18:25.111  INFO 49954 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-27 14:18:25.138  INFO 49954 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-27 14:18:25.256  WARN 49954 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.brother.chatgpt]' package. Please check your configuration.
+2023-07-27 14:18:26.979  INFO 49954 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-27 14:18:27.435  INFO 49954 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 8.381 seconds (JVM running for 9.425)
+2023-07-27 14:19:54.621  INFO 50111 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 15.0.1 on ZELIANGZENG-MB7 with PID 50111 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-27 14:19:54.623  INFO 50111 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-27 14:19:55.268  INFO 50111 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-27 14:19:55.274  INFO 50111 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-27 14:19:55.347  INFO 50111 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 0 Redis repository interfaces.
+2023-07-27 14:19:55.558  WARN 50111 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.brother.chatgpt]' package. Please check your configuration.
+2023-07-27 14:19:57.327  INFO 50111 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-27 14:19:58.073  INFO 50111 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 3.824 seconds (JVM running for 4.804)
+2023-07-27 14:22:33.017  INFO 50367 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 15.0.1 on ZELIANGZENG-MB7 with PID 50367 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-27 14:22:33.018  INFO 50367 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-27 14:22:33.652  INFO 50367 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-27 14:22:33.655  INFO 50367 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-27 14:22:33.678  INFO 50367 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-27 14:22:35.483  INFO 50367 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-27 14:22:35.778  INFO 50367 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 3.967 seconds (JVM running for 5.035)
