@@ -1316,3 +1316,614 @@ image.save("red_image.jpg")
 2023-07-28 16:36:05.195  INFO 25024 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
 2023-07-28 16:36:13.242  INFO 25024 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
 2023-07-28 16:36:13.579  INFO 25024 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 9.296 seconds (JVM running for 10.286)
+2023-07-28 21:54:06.801  WARN 29476 --- [main] o.s.boot.StartupInfoLogger               : InetAddress.getLocalHost().getHostName() took 5002 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2023-07-28 21:54:11.810  WARN 29476 --- [main] o.s.boot.system.ApplicationPid           : ManagementFactory.getRuntimeMXBean().getName() took 5006 milliseconds to respond. This may be due to slow host name resolution. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2023-07-28 21:54:11.814  INFO 29476 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 29476 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 21:54:11.815  INFO 29476 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 21:54:12.546  INFO 29476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 21:54:12.550  INFO 29476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 21:54:12.584  INFO 29476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2023-07-28 21:54:14.245  WARN 29476 --- [main] o.s.jdbc.support.SQLErrorCodesFactory    : Error while extracting database name
+
+org.springframework.jdbc.support.MetaDataAccessException: Could not get Connection for extracting meta-data; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:363) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.SQLErrorCodesFactory.resolveErrorCodes(SQLErrorCodesFactory.java:235) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.lambda$setDataSource$0(SQLErrorCodeSQLExceptionTranslator.java:140) [spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.setDataSource(SQLErrorCodeSQLExceptionTranslator.java:141) [spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.<init>(SQLErrorCodeSQLExceptionTranslator.java:102) [spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.JdbcAccessor.getExceptionTranslator(JdbcAccessor.java:136) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.JdbcAccessor.afterPropertiesSet(JdbcAccessor.java:177) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeanByName(AbstractAutowireCapableBeanFactory.java:479) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:550) ~[spring-context-5.3.28.jar:5.3.28]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:520) ~[spring-context-5.3.28.jar:5.3.28]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:673) ~[spring-context-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:228) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:329) ~[spring-context-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.28.jar:5.3.28]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.28.jar:5.3.28]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.28.jar:5.3.28]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.13.jar:2.7.13]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.13.jar:2.7.13]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.13.jar:2.7.13]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136) ~[spring-boot-test-2.7.13.jar:2.7.13]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:141) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:90) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138) ~[spring-test-5.3.28.jar:5.3.28]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[na:1.8.0_291]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[na:1.8.0_291]
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384) ~[na:1.8.0_291]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[na:1.8.0_291]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[na:1.8.0_291]
+	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312) ~[na:1.8.0_291]
+	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743) ~[na:1.8.0_291]
+	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742) ~[na:1.8.0_291]
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580) ~[na:1.8.0_291]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_291]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.util.ArrayList.forEach(ArrayList.java:1259) ~[na:1.8.0_291]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.util.ArrayList.forEach(ArrayList.java:1259) ~[na:1.8.0_291]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) ~[junit5-rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:221) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) ~[junit-rt.jar:na]
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:84) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:337) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	... 107 common frames omitted
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:448) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at java.sql.DriverManager.getConnection(DriverManager.java:664) ~[na:1.8.0_291]
+	at java.sql.DriverManager.getConnection(DriverManager.java:208) ~[na:1.8.0_291]
+	at org.springframework.jdbc.datasource.DriverManagerDataSource.getConnectionFromDriverManager(DriverManagerDataSource.java:155) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.datasource.DriverManagerDataSource.getConnectionFromDriver(DriverManagerDataSource.java:146) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.datasource.AbstractDriverBasedDataSource.getConnectionFromDriver(AbstractDriverBasedDataSource.java:205) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.datasource.AbstractDriverBasedDataSource.getConnection(AbstractDriverBasedDataSource.java:169) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:160) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:118) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81) ~[spring-jdbc-5.3.28.jar:5.3.28]
+	... 108 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_291]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_291]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_291]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_291]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:519) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.NativeProtocol.readServerCapabilities(NativeProtocol.java:475) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.NativeProtocol.beforeHandshake(NativeProtocol.java:362) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1350) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:132) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:948) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:818) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	... 120 common frames omitted
+Caused by: java.io.EOFException: Can not read response from server. Expected to read 4 bytes, read 0 bytes before connection was unexpectedly lost.
+	at com.mysql.cj.protocol.FullReadInputStream.readFully(FullReadInputStream.java:67) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:63) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:45) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:513) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	... 126 common frames omitted
+
+2023-07-28 21:54:15.957  INFO 29476 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 21:54:16.623  INFO 29476 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 25.29 seconds (JVM running for 27.011)
+2023-07-28 21:57:44.942  INFO 29780 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 29780 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 21:57:44.944  INFO 29780 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 21:57:45.653  INFO 29780 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 21:57:45.660  INFO 29780 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 21:57:45.696  INFO 29780 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2023-07-28 21:57:53.109  INFO 29780 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 21:57:53.589  INFO 29780 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 9.301 seconds (JVM running for 10.853)
+2023-07-28 22:07:48.795  INFO 30446 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 30446 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:07:48.797  INFO 30446 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:07:49.531  INFO 30446 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:07:49.535  INFO 30446 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:07:49.557  INFO 30446 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:07:59.321  INFO 30446 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:08:00.058  INFO 30446 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 11.69 seconds (JVM running for 13.76)
+2023-07-28 22:14:18.664  INFO 30885 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 30885 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:14:18.666  INFO 30885 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:14:19.238  INFO 30885 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:14:19.241  INFO 30885 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:14:19.263  INFO 30885 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:14:26.210  INFO 30885 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:14:26.626  INFO 30885 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 8.35 seconds (JVM running for 9.423)
+2023-07-28 22:15:53.780  INFO 31001 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 15.0.1 on ZELIANGZENG-MB7 with PID 31001 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:15:53.781  INFO 31001 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:15:54.354  INFO 31001 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:15:54.358  INFO 31001 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:15:54.376  INFO 31001 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:16:06.685  INFO 31001 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:16:06.999  INFO 31001 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 15.079 seconds (JVM running for 16.008)
+2023-07-28 22:34:16.024  INFO 32287 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 32287 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:34:16.027  INFO 32287 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:34:16.806  INFO 32287 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:34:16.811  INFO 32287 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:34:16.839  INFO 32287 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:34:19.833  INFO 32294 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 32294 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:34:19.836  INFO 32294 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:34:20.453  INFO 32294 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:34:20.455  INFO 32294 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:34:20.476  INFO 32294 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:34:20.940  INFO 32294 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:34:21.077  INFO 32294 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1196 ms
+2023-07-28 22:34:26.464  INFO 32309 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 32309 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:34:26.469  INFO 32309 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:34:27.548  INFO 32309 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:34:27.553  INFO 32309 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:34:27.603  INFO 32309 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:34:28.383  INFO 32309 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:34:28.394  INFO 32309 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:34:28.394  INFO 32309 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:34:28.732  INFO 32309 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:34:28.732  INFO 32309 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2213 ms
+2023-07-28 22:34:36.055  INFO 32309 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:34:36.295  INFO 32309 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:34:36.306  INFO 32309 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 10.606 seconds (JVM running for 11.524)
+2023-07-28 22:34:48.671  INFO 32309 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:34:48.672  INFO 32309 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:34:48.674  INFO 32309 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:34:48.830  INFO 32309 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-07-28 22:34:48.841  INFO 32309 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-07-28 22:34:49.714 ERROR 32309 --- [http-nio-8081-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: non null hash key required] with root cause
+
+java.lang.IllegalArgumentException: non null hash key required
+	at org.springframework.util.Assert.notNull(Assert.java:201) ~[spring-core-5.3.28.jar:5.3.28]
+	at org.springframework.data.redis.core.AbstractOperations.rawHashKey(AbstractOperations.java:163) ~[spring-data-redis-2.7.13.jar:2.7.13]
+	at org.springframework.data.redis.core.DefaultHashOperations.get(DefaultHashOperations.java:54) ~[spring-data-redis-2.7.13.jar:2.7.13]
+	at com.brother.chatgpt.controller.ChatController.loadHistory(ChatController.java:233) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_291]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_291]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_291]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_291]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.76.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.76.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_291]
+
+2023-07-28 22:34:52.475  INFO 32309 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-07-28 22:34:52.475  INFO 32309 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-07-28 22:34:52.626 ERROR 32309 --- [http-nio-8081-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: non null hash key required] with root cause
+
+java.lang.IllegalArgumentException: non null hash key required
+	at org.springframework.util.Assert.notNull(Assert.java:201) ~[spring-core-5.3.28.jar:5.3.28]
+	at org.springframework.data.redis.core.AbstractOperations.rawHashKey(AbstractOperations.java:163) ~[spring-data-redis-2.7.13.jar:2.7.13]
+	at org.springframework.data.redis.core.DefaultHashOperations.get(DefaultHashOperations.java:54) ~[spring-data-redis-2.7.13.jar:2.7.13]
+	at com.brother.chatgpt.controller.ChatController.loadHistory(ChatController.java:233) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_291]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_291]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_291]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_291]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.76.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.76.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_291]
+
+2023-07-28 22:34:59.429  INFO 32309 --- [http-nio-8081-exec-3] c.b.chatgpt.controller.ChatController    : zzl进入recordMessage, msgFqUBsH770xOCVXEKsgJdo1CxpRQIdU5LWokL/+D0iRc=
+2023-07-28 22:34:59.429  INFO 32309 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : user[zzl], ip[0:0:0:0:0:0:0:1]进入sseChat, channelId: [default], param: [f0MX5FVqZhFhgaG5XtU7TG7pT5iuKjegZJh3FIh071cCFwLO9Se2opptFpQaRnJU9/6RWwlGGn6Zeu4Fje29RpIFPc4ugZXMeaXhiosB8rmhab6Qy8uImAZdZlTHj7b4NPPz65QrMjBWI/0y8eSNrg==]
+2023-07-28 22:34:59.915 ERROR 32309 --- [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.data.redis.RedisSystemException: Error in execution; nested exception is io.lettuce.core.RedisCommandExecutionException: ERR no such key] with root cause
+
+io.lettuce.core.RedisCommandExecutionException: ERR no such key
+	at io.lettuce.core.internal.ExceptionFactory.createExecutionException(ExceptionFactory.java:147) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.internal.ExceptionFactory.createExecutionException(ExceptionFactory.java:116) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.AsyncCommand.completeResult(AsyncCommand.java:120) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.AsyncCommand.complete(AsyncCommand.java:111) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.complete(CommandHandler.java:747) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.decode(CommandHandler.java:682) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.channelRead(CommandHandler.java:599) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[netty-common-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.94.Final.jar:4.1.94.Final]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_291]
+
+2023-07-28 22:35:33.488  INFO 32378 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 32378 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:35:33.492  INFO 32378 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:35:34.243  INFO 32378 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:35:34.247  INFO 32378 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:35:34.271  INFO 32378 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:35:34.825  INFO 32378 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:35:34.837  INFO 32378 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:35:34.837  INFO 32378 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:35:34.990  INFO 32378 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:35:34.990  INFO 32378 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1426 ms
+2023-07-28 22:35:41.622  INFO 32378 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:35:41.863  INFO 32378 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:35:41.875  INFO 32378 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 8.9 seconds (JVM running for 9.698)
+2023-07-28 22:35:43.100  INFO 32378 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:35:43.100  INFO 32378 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:35:43.101  INFO 32378 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:35:47.834  INFO 32378 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : user[zzl], ip[0:0:0:0:0:0:0:1]进入sseChat, channelId: [default], param: [UvJ20Hd4biBilk2Yjm1gjr1f27im9W4wkjea0qkDzUZGGca2XMgs2g1ge2kpECB7eDEPHXGhqfUOlYhuEZMFOIkon1r46j+4YUNPGRXXLzSNL3g+YtA0kGpes9bFNiVFqIRYoP8IcalUZvwMUxmwNQ==]
+2023-07-28 22:38:30.817 ERROR 32378 --- [http-nio-8081-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.data.redis.RedisSystemException: Error in execution; nested exception is io.lettuce.core.RedisCommandExecutionException: ERR no such key] with root cause
+
+io.lettuce.core.RedisCommandExecutionException: ERR no such key
+	at io.lettuce.core.internal.ExceptionFactory.createExecutionException(ExceptionFactory.java:147) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.internal.ExceptionFactory.createExecutionException(ExceptionFactory.java:116) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.AsyncCommand.completeResult(AsyncCommand.java:120) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.AsyncCommand.complete(AsyncCommand.java:111) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.complete(CommandHandler.java:747) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.decode(CommandHandler.java:682) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.channelRead(CommandHandler.java:599) ~[lettuce-core-6.1.10.RELEASE.jar:6.1.10.RELEASE]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) ~[netty-transport-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[netty-common-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.94.Final.jar:4.1.94.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.94.Final.jar:4.1.94.Final]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_291]
+
+2023-07-28 22:38:37.005  INFO 32592 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 32592 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:38:37.009  INFO 32592 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:38:37.570  INFO 32592 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:38:37.572  INFO 32592 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:38:37.590  INFO 32592 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:38:38.108  INFO 32592 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:38:38.116  INFO 32592 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:38:38.116  INFO 32592 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:38:38.249  INFO 32592 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:38:38.249  INFO 32592 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1193 ms
+2023-07-28 22:38:46.846  INFO 32592 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:38:47.050  INFO 32592 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:38:47.062  INFO 32592 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 10.47 seconds (JVM running for 11.125)
+2023-07-28 22:38:55.332  INFO 32592 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:38:55.332  INFO 32592 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:38:55.333  INFO 32592 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:38:55.396  INFO 32592 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : user[zzl], ip[0:0:0:0:0:0:0:1]进入sseChat, channelId: [default], param: [kqgSvV7KEbVSFG4uVtuEMQ37KIRJnZjlW12sz4TktGKnJBd3iMS9JWJbVhZB4xKQQMe6rzXqs36/KJJeuBaY/JZ2QvelZwj1NA6iQswhbEpUfg/SpZwpu+ynzLRX6nQNXDNDI4N0P9LsAZOR0SHv5w==]
+2023-07-28 22:39:05.448  INFO 32592 --- [OkHttp https://api.openai.com/...] c.b.chatgpt.controller.ChatController    : userId: [zzl], channelId[default]回答完成: W0qchWxit2DQuHHLGkAdzLGe7Zm1N9Jh3zeyEDY6btn0aA0egyi+zd/NhvUDd5e9
+2023-07-28 22:40:58.274  INFO 32751 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 32751 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:40:58.276  INFO 32751 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:40:58.764  INFO 32751 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:40:58.766  INFO 32751 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:40:58.783  INFO 32751 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:40:59.174  INFO 32751 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:40:59.181  INFO 32751 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:40:59.181  INFO 32751 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:40:59.292  INFO 32751 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:40:59.292  INFO 32751 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 981 ms
+2023-07-28 22:41:02.808  INFO 32751 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:41:03.014  INFO 32751 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:41:03.026  INFO 32751 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 5.123 seconds (JVM running for 5.798)
+2023-07-28 22:41:42.338  INFO 32751 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:41:42.338  INFO 32751 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:41:42.340  INFO 32751 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-07-28 22:41:42.447  INFO 32751 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-07-28 22:41:42.456  INFO 32751 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-07-28 22:41:42.958 ERROR 32751 --- [http-nio-8081-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: non null hash key required] with root cause
+
+java.lang.IllegalArgumentException: non null hash key required
+	at org.springframework.util.Assert.notNull(Assert.java:201) ~[spring-core-5.3.28.jar:5.3.28]
+	at org.springframework.data.redis.core.AbstractOperations.rawHashKey(AbstractOperations.java:163) ~[spring-data-redis-2.7.13.jar:2.7.13]
+	at org.springframework.data.redis.core.DefaultHashOperations.get(DefaultHashOperations.java:54) ~[spring-data-redis-2.7.13.jar:2.7.13]
+	at com.brother.chatgpt.controller.ChatController.loadHistory(ChatController.java:233) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_291]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_291]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_291]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_291]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.76.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.28.jar:5.3.28]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.76.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.28.jar:5.3.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.76.jar:9.0.76]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_291]
+
+2023-07-28 22:41:46.976  INFO 32751 --- [http-nio-8081-exec-9] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zzl}
+2023-07-28 22:41:48.975  INFO 32751 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zzl}
+2023-07-28 22:41:57.776  INFO 32751 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=test}
+2023-07-28 22:42:07.497  INFO 32751 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=test}
+2023-07-28 22:42:10.675  INFO 32751 --- [http-nio-8081-exec-4] c.b.chatgpt.controller.ChatController    : userId: [test]进入loadChats
+2023-07-28 22:42:10.675  INFO 32751 --- [http-nio-8081-exec-5] c.b.chatgpt.controller.ChatController    : userId: [test]进入loadHistory 
+2023-07-28 22:42:52.571  INFO 32751 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [test]进入loadChats
+2023-07-28 22:42:52.571  INFO 32751 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [test]进入loadHistory 
+2023-07-28 22:42:53.648  INFO 32751 --- [http-nio-8081-exec-9] c.b.chatgpt.controller.ChatController    : userId: [test]进入loadChats
+2023-07-28 22:42:53.649  INFO 32751 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : userId: [test]进入loadHistory 
+2023-07-28 22:43:04.287  INFO 32751 --- [http-nio-8081-exec-3] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=1234}
+2023-07-28 22:43:09.092  INFO 32751 --- [http-nio-8081-exec-5] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=1234}
+2023-07-28 22:43:12.007  INFO 32751 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : userId: [1234]进入loadChats
+2023-07-28 22:43:12.007  INFO 32751 --- [http-nio-8081-exec-8] c.b.chatgpt.controller.ChatController    : userId: [1234]进入loadHistory 
+2023-07-28 22:43:29.469  INFO 32751 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=123}
+2023-07-28 22:43:31.070  INFO 32751 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : userId: [123]进入loadChats
+2023-07-28 22:43:31.070  INFO 32751 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : userId: [123]进入loadHistory 
+2023-07-28 22:44:57.746  INFO 33007 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 33007 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:44:57.749  INFO 33007 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:44:58.302  INFO 33007 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:44:58.304  INFO 33007 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:44:58.324  INFO 33007 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:44:58.722  INFO 33007 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:44:58.729  INFO 33007 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:44:58.730  INFO 33007 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:44:58.842  INFO 33007 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:44:58.842  INFO 33007 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1057 ms
+2023-07-28 22:45:05.255  INFO 33007 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:45:05.490  INFO 33007 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:45:05.501  INFO 33007 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 8.124 seconds (JVM running for 8.667)
+2023-07-28 22:45:07.766  INFO 33007 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:45:07.766  INFO 33007 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:45:07.767  INFO 33007 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:45:07.833  INFO 33007 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zzl}
+2023-07-28 22:45:10.738  INFO 33007 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-07-28 22:45:10.738  INFO 33007 --- [http-nio-8081-exec-8] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-07-28 22:45:39.039  INFO 33007 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : zzl进入recordMessage, msg7oWHNWiFInlIAEzu4UQKOmahuj6vRp1Dao0Zea5GMYQ=
+2023-07-28 22:45:39.046  INFO 33007 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : user[zzl], ip[0:0:0:0:0:0:0:1]进入sseChat, channelId: [default], param: [63xve7dA1Zxr2XqhwDLlP9m+ry0qw0N6BIdpSJDnUsIriHM8vY8TCXLJONLcDhtGmMi/OBsp7xpbSO5snZ8pqSugBOVmlen9gZ0SfW+KFg5CssiF5ygX+45ySIOt9yZg0zlJwX4xk3HE/3VvifX8YESRKPBivj2lHKqvkA6mqgS2o+Hh3sbmUA/tdkbJvmZ5k5eIBWdGloTSL2jToy2hpLGTbooqfgTjRejDNvmu1KI=]
+2023-07-28 22:45:50.826  INFO 33007 --- [OkHttp https://api.openai.com/...] c.b.chatgpt.controller.ChatController    : userId: [zzl], channelId[default]回答完成: uhbiCZoAEU0PqLG5O6NppTZDNEKSgfiIS3aFOOfbt+6jPrglI7Dq8H+8GHStEPuOqbQ/77cMxGlvmiz4fewBaKXc3/RjvI1DyYbFkBtuj4rU1kBrbekkqklq2GEE5v6zNj9a2Z2QRjuzCUmT+Hngjh1uRu9JuGGc4TGyJtyn7zazavjXVMvsb4Z20rcQbzpw+31zFn3gYQBlNx9DYReVXqnNSqPimBMYFRV2Bt13XaoEZkhOwgbpGodSdGm4tDmwpI05EEOxqwXbAilMUfb0rfNL6lCsj99nbN6P3YEyU3bVtzeFCu3+h95jZsJcLwTCo88gZksRtTHnSsxAnttKorHNemdc/AYxDPa6sOiuAj5Z8dVBnCEVvk2Z616JOVcQMkqfn1Z6m4Xrtd8yAK4VPMVjTAUep6FwvcoYr2w+KBWn6nEdx0i5msfBemkg7hbKX0I1yc4PUa5LJfSweVGfr4Y59JpZ/54OSwNpnUuAHjVt1NaBFbuTkZgDUr7w68OS5c09DXE9sc25O/+Lbc/EPdJWWmu0Foc4J6p2kVg2jjdDVSvOHdUsEIP31B855g5b3lx24Gm2tpjm/fBeILATCuA7gm7N0IyXAG3b1oknudoGFLTURiFi6MdarxPGmFdLmkIqQ1NS4Xdt3Xh9fXzs9/yyFxcI/vGc84bOj6ayUMW6v53u1r7I/i5Aei8P5VTvdPVSGJ9C5dOl17CoPQcsPYuw0nNVDTfkieeVpvgZmEf3gtlAVot8oB30ljdBFs7egPYDIzGOk5LIYBSRqAC13fe1rduzcOUgKZRv6tRyAHcB09ryoQVxT5Uq1BlUokcMdsibe3aSkHq5py7TmyNAxPZqX0sxbGJK+HkxYe+m92gSY/oEV+d6HQIfMYu/NxpLdKMS0fWVMuLSwQporQqaBPxVLWyH/0UQe4Bpawi2glJFqqieJSUjfl7uszhsGaJqZsiVwPN61NuGSpOVu87PRVMJJEW33LSibkXXux9VgnhiXVvlxQN4dioBeUEebexQyX7BkV6fY5jro2Tnh8jcKqEYrdsg10IWEyDHgYQW51Y=
+2023-07-28 22:52:04.776  INFO 33460 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 33460 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:52:04.778  INFO 33460 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:52:05.315  INFO 33460 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:52:05.316  INFO 33460 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:52:05.333  INFO 33460 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:52:05.735  INFO 33460 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:52:05.743  INFO 33460 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:52:05.744  INFO 33460 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:52:05.866  INFO 33460 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:52:05.867  INFO 33460 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1055 ms
+2023-07-28 22:52:10.688  INFO 33460 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:52:10.893  INFO 33460 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:52:10.905  INFO 33460 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 6.486 seconds (JVM running for 7.031)
+2023-07-28 22:52:17.528  INFO 33460 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:52:17.529  INFO 33460 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:52:17.530  INFO 33460 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:52:17.656  INFO 33460 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-07-28 22:52:17.669  INFO 33460 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-07-28 22:52:20.858  INFO 33460 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zzl}
+2023-07-28 22:52:31.028  INFO 33487 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 33487 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:52:31.033  INFO 33487 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:52:31.699  INFO 33487 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:52:31.703  INFO 33487 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:52:31.729  INFO 33487 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:52:32.220  INFO 33487 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:52:32.228  INFO 33487 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:52:32.229  INFO 33487 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:52:32.346  INFO 33487 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:52:32.346  INFO 33487 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1253 ms
+2023-07-28 22:52:37.678  INFO 33487 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:52:37.923  INFO 33487 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:52:37.935  INFO 33487 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 7.462 seconds (JVM running for 8.259)
+2023-07-28 22:52:41.678  INFO 33487 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:52:41.679  INFO 33487 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:52:41.680  INFO 33487 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:52:41.763  INFO 33487 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zengzeliang}
+2023-07-28 22:53:31.785  INFO 33557 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 33557 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-07-28 22:53:31.788  INFO 33557 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-07-28 22:53:32.304  INFO 33557 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-28 22:53:32.306  INFO 33557 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-28 22:53:32.324  INFO 33557 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-07-28 22:53:32.747  INFO 33557 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-07-28 22:53:32.754  INFO 33557 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-28 22:53:32.755  INFO 33557 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-07-28 22:53:32.879  INFO 33557 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-28 22:53:32.879  INFO 33557 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1050 ms
+2023-07-28 22:53:41.104  INFO 33557 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-28 22:53:41.301  INFO 33557 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-07-28 22:53:41.313  INFO 33557 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 9.975 seconds (JVM running for 10.654)
+2023-07-28 22:54:06.169  INFO 33557 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-28 22:54:06.170  INFO 33557 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-28 22:54:06.171  INFO 33557 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-28 22:54:06.314  INFO 33557 --- [http-nio-8081-exec-3] c.b.chatgpt.controller.ChatController    : userId: [zengzeliang]进入loadHistory 
+2023-07-28 22:54:06.324  INFO 33557 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : userId: [zengzeliang]进入loadChats
+2023-07-28 22:54:07.974  INFO 33557 --- [http-nio-8081-exec-4] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zengzeliang}
+2023-07-28 22:54:10.002  INFO 33557 --- [http-nio-8081-exec-5] c.b.chatgpt.controller.ChatController    : 进入setUserId, {userId=zengzeliang}

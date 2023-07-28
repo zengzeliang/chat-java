@@ -2,8 +2,10 @@ package com.brother.chatgpt.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.brother.chatgpt.bean.Channel;
+import com.brother.chatgpt.bean.UserInfo;
 import com.brother.chatgpt.config.InitConfig;
 import com.brother.chatgpt.enums.RecordMessageTypeEnum;
+import com.brother.chatgpt.util.EncryptUtils;
 import com.plexpt.chatgpt.entity.chat.ChatCompletion;
 import com.plexpt.chatgpt.entity.chat.ChatCompletionResponse;
 import com.plexpt.chatgpt.entity.chat.Message;
@@ -18,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -26,6 +30,8 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -227,6 +233,10 @@ public class ChatController {
         // 获取当前选择的聊天channel
         String selectedChannelId = (String) redisTemplate.opsForValue().get(USER_SELECT_CHANNEL_PREFIX + userId);
 
+        if(selectedChannelId == null){
+            selectedChannelId = DEFAULT_CHANNEL_ID;
+        }
+
         HashOperations<String, String, List<Map<String, String>>> hashOps = redisTemplate.opsForHash();
 
         List<Map<String, String>> messages = hashOps.get(USER_CHAT_ID_MESSAGE_PREFIX + userId, selectedChannelId);
@@ -266,7 +276,20 @@ public class ChatController {
             result.put("code", 200);
             result.put("message", "success");
             // 保存到数据库
-            jdbcTemplate.execute("INSERT INTO userInfo (userId, password, buy, state) \n" + "VALUES ('"+ userId +"', '123456', 0, 1);");
+
+            String sql = "SELECT * FROM userInfo WHERE userId = ? AND password = ?";
+
+            List<UserInfo> userList = jdbcTemplate.query(sql, new PreparedStatementSetter() {
+                @Override
+                public void setValues(PreparedStatement preparedStatement) throws SQLException {
+                    preparedStatement.setString(1, userId); // 设置第一个占位符的值为 18
+                    preparedStatement.setString(2, "123456"); // 设置第二个占位符的值为 "Male"
+                }
+            }, new BeanPropertyRowMapper<>(UserInfo.class));
+
+            if(userList == null || userList.size() == 0){
+                jdbcTemplate.execute("INSERT INTO userInfo (userId, password, buy, state) " + "VALUES ('"+ userId +"', '123456', 0, 1);");
+            }
             return result;
         }
     }
@@ -335,7 +358,7 @@ public class ChatController {
         String prompt = (String) param.get("content");
 
         String clientIP = getClientIP(request);
-        log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, param);
+        log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, EncryptUtils.encrypt(param.toString()));
 
         if (!checkUser(userId)) {
             return "error";
@@ -343,19 +366,7 @@ public class ChatController {
 
         if("UNAUTHORIZED".equals(userId)){
             // 单独处理
-            List<Message> messages = new ArrayList<>();
-
-            messages.add(Message.of(prompt));
-            SseEmitter sseEmitter = new SseEmitter(-1L);
-            SseStreamListener listener = new SseStreamListener(sseEmitter);
-            listener.setOnComplate(msg -> {
-                // 回答完成，可以做一些事情
-                sseEmitter.complete();
-                // 记录用户问题以及给出的消息
-                log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, msg);
-                return;
-            });
-            initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
+            SseEmitter sseEmitter = processUnauthorized(userId, channelId, prompt);
             return sseEmitter;
         }
 
@@ -366,6 +377,11 @@ public class ChatController {
 
         ListOperations<String, Object> listOps = redisTemplate.opsForList();
         List<Object> channelInfoList = listOps.range(USER_CHAT_ID_CHANNEL_PREFIX + userId, 0, -1);
+
+        if(channelInfoList == null){
+            SseEmitter sseEmitter = processUnauthorized(userId, channelId, prompt);
+            return sseEmitter;
+        }
 
         // 找到这个channle，并且修改mode设置
         int index;
@@ -382,10 +398,8 @@ public class ChatController {
 
         if(targetChannel == null){
             targetChannel = new Channel(DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
-            targetChannel.setMode(mode);
-            listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, 0, JSON.toJSONString(targetChannel));
+            listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, JSON.toJSONString(targetChannel));
         }else{
-            targetChannel.setMode(mode);
             listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, index, JSON.toJSONString(targetChannel));
         }
 
@@ -430,11 +444,28 @@ public class ChatController {
             recordMessageInfo(userId, channelId, prompt, RecordMessageTypeEnum.USER_TYPE);
             recordMessageInfo(userId, channelId, msg, RecordMessageTypeEnum.ASSISTANT);
 
-            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, msg);
+            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, EncryptUtils.encrypt(msg));
             return;
         });
         initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
 
+        return sseEmitter;
+    }
+
+    private SseEmitter processUnauthorized(String userId, String channelId, String prompt) {
+        List<Message> messages = new ArrayList<>();
+
+        messages.add(Message.of(prompt));
+        SseEmitter sseEmitter = new SseEmitter(-1L);
+        SseStreamListener listener = new SseStreamListener(sseEmitter);
+        listener.setOnComplate(msg -> {
+            // 回答完成，可以做一些事情
+            sseEmitter.complete();
+            // 记录用户问题以及给出的消息
+            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, EncryptUtils.encrypt(msg));
+            return;
+        });
+        initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
         return sseEmitter;
     }
 
@@ -448,7 +479,7 @@ public class ChatController {
 
         String msg = (String) param.get("msg");
 
-        log.info("{}进入recordMessage, msg{}", userId, msg);
+        log.info("{}进入recordMessage, msg{}", userId, EncryptUtils.encrypt(msg));
 
         Integer messageType = (Integer) param.get("messageType");
 
@@ -550,7 +581,7 @@ public class ChatController {
         String userId = (String)param.get("userId");
         String clientIp = getClientIP(servletRequest);
 
-        log.info("userId: [{}], ip: [{}], param: [{}]进入image", userId, clientIp, prompt);
+        log.info("userId: [{}], ip: [{}], param: [{}]进入image", userId, clientIp, EncryptUtils.encrypt(prompt));
 
         // 设置您的OpenAI API密钥
         String apiKey = initConfig.getParamConfig().getApiKeys().get(0);
@@ -562,7 +593,7 @@ public class ChatController {
 
         // 构建请求体
         String requestBodyContent = "{\"prompt\": \"" + prompt.trim() + "\", \"n\": 1, \"size\":\"256x256\"}"; // 根据实际需求替换为您的请求体内容
-        log.info(requestBodyContent);
+        log.info(EncryptUtils.encrypt(requestBodyContent));
         okhttp3.RequestBody requestBody = okhttp3.RequestBody.create(requestBodyContent, MediaType.parse("application/json"));
         Request request = new Request.Builder().url(IMAGE_OPENAI_URL).headers(headers).post(requestBody).build();
         okhttp3.Response response = okHttpClient.newCall(request).execute();

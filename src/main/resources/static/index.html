@@ -520,10 +520,10 @@
             password = localStorage.getItem("password");
         }
 
-        let user_change_flag = false;
-        if (userId !== $("#user-id").val().trim()){
-            user_change_flag = true;
-        }
+        let user_change_flag = true;
+        // if (userId !== $("#user-id").val().trim()){
+        //     user_change_flag = true;
+        // }
 
         userId = $("#user-id").val().trim();
         password = $("#password").val().trim();
