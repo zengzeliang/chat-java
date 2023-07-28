@@ -215,7 +215,7 @@
             float: right;
             cursor: pointer;
         }
-        .button-area #chmod-btn, .button-area #del-btn {
+        .button-area #chmod-btn,.button-area #image-btn, .button-area #del-btn {
             max-width: 120px;
         }
         .button-area button:hover{
@@ -594,7 +594,7 @@
                     <div class="setting-label">
                         <div>新密码</div>
                         <div class="setting-sub-label">
-                            修改访问密码
+                            修改密码时填写
                         </div>
                     </div>
                     <input type="password" id="new_password" name="new_password">
@@ -647,8 +647,8 @@
             <div class="button-area">
                 <button id="stop-btn" class="talk_sub" style="display: none">停止生成</button>
                 <button id="del-btn" class="talk_sub">删除聊天记录</button>
-                <button id="image-btn" class="talk_sub">生成图片</button>
-                <button id="chmod-btn" class="talk_sub">当前为普通对话</button>
+                <button id="image-btn" class="talk_sub">当前为生成文字</button>
+                <!--<button id="chmod-btn" class="talk_sub">当前为普通对话</button>-->
                 <button id="send-btn" class="talk_sub">发 送</button>
             </div>
         </div>
@@ -688,8 +688,7 @@
     // let baseUrl = "http://localhost:8081";
     let baseUrl = "";
     // let baseUrl = "http://82.156.167.18:2023";
-    let imageUrl = "http://82.156.167.18:9298";
-
+    // let imageUrl = "http://82.156.167.:9298";
 
     // 当鼠标移动到 bubble-left时显示复制按钮
     $(document).on("mouseover", ".bubble-left", function () {
@@ -928,6 +927,7 @@
             "name": "默认对话",
             "selected": true,
             "mode": "continuous",
+            "chatMode": "text",
         };
     }
 
@@ -952,17 +952,23 @@
                     console.log(chats[i].selected)
                     if(chats[i].selected === true){
                         selectedChatId = chats[i].id;
-                        if(chats[i]["mode"]==="normal"){
-                            $("#chmod-btn").text("当前为普通对话");
-                        } else {
-                            $("#chmod-btn").text("当前为连续对话");
+                        // if(chats[i]["mode"]==="normal"){
+                        //     $("#chmod-btn").text("当前为普通对话");
+                        // } else {
+                        //     $("#chmod-btn").text("当前为连续对话");
+                        // }
+                        if(chats[i]["chatMode"] == "picture"){
+                            $("#image-btn").text("当前为生成图片");
+                        }else{
+                            $("#image-btn").text("当前为生成文字");
                         }
                     }
                     html += '<div class="chat" id='+chats[i].id+' data-name='+chats[i].name+' data-selected='+chats[i].selected+' data-messages_total='+chats[i].messages_total+'>' + chats[i].name + '</div>';
                 }
                 if(chats.length === 0){     // 表示是未绑定用户状态
                     $("#del-btn").hide();
-                    $("#chmod-btn").hide();
+                    // $("#chmod-btn").hide();
+                    $("#image-btn").hide();
                     $(".chat-list").hide();
                 } else {
                     $(".chat-list").append(html);
@@ -1017,10 +1023,16 @@
                     let chat_info = generateChatInfo(selectedChatId);
                     chat_info["name"] = name;
                     chats.push(chat_info);
-                    if(chat_info["mode"]==="normal"){
-                        $("#chmod-btn").text("当前为普通对话");
+                    // if(chat_info["mode"]==="normal"){
+                    //     $("#chmod-btn").text("当前为普通对话");
+                    // } else {
+                    //     $("#chmod-btn").text("当前为连续对话");
+                    // }
+
+                    if(chat_info["chatMode"]==="picture"){
+                        $("#image-btn").text("当前为生成图片");
                     } else {
-                        $("#chmod-btn").text("当前为连续对话");
+                        $("#image-btn").text("当前为生成文字");
                     }
                     loadHistory();
                     renderHeadInfo();
@@ -1070,10 +1082,15 @@
                     }
                     chat_info = getSelectedChatInfo();
                     chat_info["selected"] = true;
-                    if(chat_info["mode"]==="normal"){
-                        $("#chmod-btn").text("当前为普通对话");
+                    // if(chat_info["mode"]==="normal"){
+                    //     $("#chmod-btn").text("当前为普通对话");
+                    // } else {
+                    //     $("#chmod-btn").text("当前为连续对话");
+                    // }
+                    if(chat_info["chatMode"]==="picture"){
+                        $("#image-btn").text("当前为生成图片");
                     } else {
-                        $("#chmod-btn").text("当前为连续对话");
+                        $("#image-btn").text("当前为生成文字");
                     }
                     loadHistory();
                     renderHeadInfo();
@@ -1085,7 +1102,7 @@
     function generateDefaultMessage() {
         let messages = [];
 
-        let message = {"role": "assistant", "content": "[这里是ChatGPT助手，喜欢开发者可以点击这里](" + "donate.html" + ")"};
+        let message = {"role": "assistant", "content": "[这里是ChatGPT助手, 喜欢开发者可以点击这里](" + "donate.html" + ")"};
 
         messages.push(message);
 
@@ -1213,10 +1230,16 @@
             alert("请输入内容");
             return;
         }
+
+        let userId = localStorage.getItem("userId") == null ? "" : localStorage.getItem("userId");
+        if(getSelectedChatInfo().chatMode === "picture"){
+            generatePicture(text);
+            return;
+        }
+
         let html = ''
         let send_time = new Date();
         let send_time_str = get_time_str(send_time);
-        let userId = localStorage.getItem("userId") == null ? "" : localStorage.getItem("userId");
         if (send_time.getTime() - last_time > 1000 * 60 * 5) {
             // 以'%Y年%#m月%#d日 %H:%M'格式显示时间
             html += '<div class="item item-center"><span>' + send_time_str + '</span></div>';
@@ -1259,37 +1282,6 @@
         let headers = createHeaders();
         headers["Content-Type"] = "application/json";
 
-        if(text.startsWith("chat:")){
-            let userId = text.split(":")[1].trim();
-            // 设置用户信息
-            $.ajax({
-                url: baseUrl + "/setUserId",
-                type: "Post",
-                headers: headers,
-                dataType: "json",
-                data: JSON.stringify({"userId": userId}),
-                success: function (data) {
-                    console.log(data);
-                    if(data.code == 200) {
-                        localStorage.setItem("userId", userId);
-                        // 提示消息
-                        html = '<div class="item item-center"><span>' + '授权成功正在跳转到首页...' + '</span></div>';
-                        $(".content").append(html);
-                        $(".content").scrollTop($(".content")[0].scrollHeight);
-                        setTimeout(() => {
-                            location.reload(); // 重新加载页面
-                        }, 1000);
-                    }else if(data.code == 201) {
-                        // 用户id已经存在
-                        html = '<div class="item item-center"><span>' + userId + "已经存在请设置其他id" + '</span></div>';
-                        $(".content").append(html);
-                        $(".content").scrollTop($(".content")[0].scrollHeight);
-                    }
-                }
-            });
-            return;
-        }
-
         let chat_item = $('<div class="item item-left"><div class="avatar"><img src="static/chatgpt.png" /></div><div class="bubble bubble-left markdown">正在等待回复</div></div>')
         $(".content").append(chat_item);
         $(".content").scrollTop($(".content")[0].scrollHeight);
@@ -1304,7 +1296,9 @@
             "content": text,
             "channelId": selectedChatId,
             "mode": getSelectedChatInfo().mode ? getSelectedChatInfo().mode : "normal",
+            "chatMode": getSelectedChatInfo().chatMode ? getSelectedChatInfo().chatMode : "text",
         };
+
         console.log("[Request]");
         console.log(request_data);
         let response_text =  "";
@@ -1390,9 +1384,62 @@
     });
 
 
-    $("#image-btn").click(function (){
-        console.log("click")
-        var text = $("#textarea").val();
+    // $("#image-btn").click(function (){
+    //     console.log("click")
+    //     var text = $("#textarea").val();
+    //     console.log("text");
+    //     console.log(text);
+    //     if (text == "") {
+    //         alert("请输入内容");
+    //         return;
+    //     }
+    //     let html = ''
+    //     html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + marked.marked(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
+    //     $(".content").append(html);
+    //     $("#textarea").val("");
+    //     $(".content").scrollTop($(".content")[0].scrollHeight);
+    //
+    //     let headers = createHeaders();
+    //     headers["Content-Type"] = "application/json";
+    //
+    //     let chat_item = $('<div class="item item-left"><div class="avatar"><img src="static/chatgpt.png" /></div><div class="bubble bubble-left markdown">正在等待回复</div></div>')
+    //     $(".content").append(chat_item);
+    //     $(".content").scrollTop($(".content")[0].scrollHeight);
+    //
+    //     getSelectedChatInfo().messages_total += 1;
+    //     renderHeadInfo();
+    //     const data = {};
+    //     data["msg"] = text;
+    //     $("#stop-btn").show();
+    //     returnMessageAjax = $.ajax({
+    //         url: imageUrl + "/image",
+    //         data: JSON.stringify(data),
+    //         headers: headers,
+    //         type: "Post",
+    //         dataType: "text",
+    //         timeout: 1000 * 60 * 2,
+    //
+    //         success: function (response) {
+    //             response = JSON.parse(response);
+    //             if (status === 'timeout') {
+    //                 alert("请求超时");
+    //             }
+    //             let div =  document.createElement('div');
+    //             const responseUrl = response.data[0].url;
+    //             div.innerHTML = marked.marked("<img src = '" + responseUrl + "'/>");
+    //             chat_item.find(".bubble").empty();
+    //             chat_item.find(".bubble").append(div);
+    //             $(".content").scrollTop($(".content")[0].scrollHeight);
+    //
+    //             $("#stop-btn").hide();
+    //             // getSummarize();
+    //             getSelectedChatInfo().messages_total += 1;
+    //             renderHeadInfo();
+    //         }
+    //     });
+    // });
+
+    function generatePicture(text){
         console.log("text");
         console.log(text);
         if (text == "") {
@@ -1408,6 +1455,12 @@
         let headers = createHeaders();
         headers["Content-Type"] = "application/json";
 
+        let userId = localStorage.getItem("userId") == null ? "" : localStorage.getItem("userId");
+
+        if(userId === ""){
+            userId = "UNAUTHORIZED";
+        }
+
         let chat_item = $('<div class="item item-left"><div class="avatar"><img src="static/chatgpt.png" /></div><div class="bubble bubble-left markdown">正在等待回复</div></div>')
         $(".content").append(chat_item);
         $(".content").scrollTop($(".content")[0].scrollHeight);
@@ -1416,9 +1469,10 @@
         renderHeadInfo();
         const data = {};
         data["msg"] = text;
+        data['userId'] = userId;
         $("#stop-btn").show();
         returnMessageAjax = $.ajax({
-            url: imageUrl + "/image",
+            url: baseUrl + "/image",
             data: JSON.stringify(data),
             headers: headers,
             type: "Post",
@@ -1443,8 +1497,8 @@
                 renderHeadInfo();
             }
         });
+    }
 
-    });
     $("#textarea").keydown(function (e) {
         if (e.keyCode === 13 && !e.shiftKey) {
             e.preventDefault();
@@ -1463,20 +1517,42 @@
             }
         }
     });
-    $('#chmod-btn').click(function () {
+    // $('#chmod-btn').click(function () {
+    //     let chat_info = getSelectedChatInfo();
+    //     if (!("mode" in chat_info)){
+    //         chat_info["mode"] = "continuous";
+    //     }
+    //     let display_content = "";
+    //     if(chat_info["mode"]==="normal"){
+    //         chat_info["mode"] = "continuous";
+    //         display_content = "切换为连续对话";
+    //         $("#chmod-btn").text("当前为连续对话");
+    //     } else {
+    //         chat_info["mode"] = "normal";
+    //         display_content = "切换为普通对话";
+    //         $("#chmod-btn").text("当前为普通对话");
+    //     }
+    //
+    //     var html = '<div class="item item-center"><span>'+display_content+'</span></div>'
+    //     $(".content").append(html);
+    //     $(".content").scrollTop($(".content")[0].scrollHeight);
+    // });
+
+
+    $('#image-btn').click(function () {
         let chat_info = getSelectedChatInfo();
-        if (!("mode" in chat_info)){
-            chat_info["mode"] = "continuous";
+        if (!("chatMode" in chat_info)){
+            chat_info["chatMode"] = "text";
         }
         let display_content = "";
-        if(chat_info["mode"]==="normal"){
-            chat_info["mode"] = "continuous";
-            display_content = "切换为连续对话";
-            $("#chmod-btn").text("当前为连续对话");
+        if(chat_info["chatMode"]==="picture"){
+            chat_info["chatMode"] = "text";
+            display_content = "切换为生成文字";
+            $("#image-btn").text("当前为生成文字");
         } else {
-            chat_info["mode"] = "normal";
-            display_content = "切换为普通对话";
-            $("#chmod-btn").text("当前为普通对话");
+            chat_info["chatMode"] = "picture";
+            display_content = "切换为生成图片";
+            $("#image-btn").text("当前为生成图片");
         }
 
         var html = '<div class="item item-center"><span>'+display_content+'</span></div>'

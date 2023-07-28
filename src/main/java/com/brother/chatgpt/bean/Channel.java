@@ -11,6 +11,6 @@ public class Channel {
     private String id;
     private String name;
     private String mode;
-
+    private String chatMode; // text/picture
 
 }

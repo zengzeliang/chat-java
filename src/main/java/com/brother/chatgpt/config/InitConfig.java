@@ -5,9 +5,20 @@ import com.plexpt.chatgpt.ChatGPT;
 import com.plexpt.chatgpt.ChatGPTStream;
 import com.plexpt.chatgpt.util.Proxys;
 import lombok.Data;
+import okhttp3.ConnectionPool;
+import okhttp3.OkHttpClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Data
@@ -53,6 +64,23 @@ public class InitConfig {
         this.storeMessage = paramConfig.getStoreMessage();
     }
 
+    @Bean
+    public RestTemplate restTemplate() {
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(paramConfig.getIp(), paramConfig.getPort()));
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setProxy(proxy);
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        return restTemplate;
+    }
+
+    @Bean
+    public OkHttpClient okHttpClient(){
+        ConnectionPool connectionPool = new ConnectionPool(5, 10, TimeUnit.MINUTES);
+
+        OkHttpClient client = new OkHttpClient().newBuilder().proxy(proxy).connectionPool(connectionPool)
+                .build();
+        return client;
+    }
 
     @Override
     public String toString() {

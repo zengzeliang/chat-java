@@ -9,15 +9,23 @@ import com.plexpt.chatgpt.entity.chat.ChatCompletionResponse;
 import com.plexpt.chatgpt.entity.chat.Message;
 import com.plexpt.chatgpt.listener.SseStreamListener;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -30,10 +38,21 @@ public class ChatController {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Resource
+    private JdbcTemplate jdbcTemplate;
+
+    @Resource
+    private OkHttpClient okHttpClient;
+
     private static final String DEFAULT_CHANNEL_ID = "default";
     private static final String DEFAULT_CHANNEL_NAME = "默认对话";
 
     private static final String DEFAULT_CHANNEL_MODE = "continuous";
+
+    private static final String DEFAULT_CHANNEL_CHAT_MODE = "text";
 
     // 存储用户每个通道的消息 {"zzl": {"default": [{"role": "角色", "content": "回答内容"}], "channel1": [{"role": "角色", "content": "回答内容"}]}, "zze": {"default": [{"role": "juese", "": ""}]}}
     private static final String USER_CHAT_ID_MESSAGE_PREFIX = "chat_id_message";
@@ -42,6 +61,8 @@ public class ChatController {
     private static final String USER_CHAT_ID_CHANNEL_PREFIX = "chat_id_channel";
 
     private static final String USER_SELECT_CHANNEL_PREFIX = "select_channel";
+
+    private static final String IMAGE_OPENAI_URL = "https://api.openai.com/v1/images/generations";
 
     // 非流式 单次聊天调用
     @GetMapping("/chat")
@@ -156,7 +177,7 @@ public class ChatController {
 
         // 生成聊天channel id
         String channelId = UUID.randomUUID().toString();
-        setChannelInfo(userId, channelId, name, DEFAULT_CHANNEL_MODE);
+        setChannelInfo(userId, channelId, name, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
 
         HashOperations<String, String, List<Map<String, String>>> hashOps = redisTemplate.opsForHash();
         Map<String, Object> data = new HashMap<>();
@@ -240,10 +261,12 @@ public class ChatController {
             return result;
         }else{
             // 设置默认channel
-            setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE);
+            setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
             Map<String, Object> result = new HashMap<>();
             result.put("code", 200);
             result.put("message", "success");
+            // 保存到数据库
+            jdbcTemplate.execute("INSERT INTO userInfo (userId, password, buy, state) \n" + "VALUES ('"+ userId +"', '123456', 0, 1);");
             return result;
         }
     }
@@ -358,7 +381,7 @@ public class ChatController {
         }
 
         if(targetChannel == null){
-            targetChannel = new Channel(DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE);
+            targetChannel = new Channel(DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
             targetChannel.setMode(mode);
             listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, 0, JSON.toJSONString(targetChannel));
         }else{
@@ -477,7 +500,7 @@ public class ChatController {
     }
 
     // 设置channel信息
-    private void setChannelInfo(String userId, String channelId, String channelName, String mode) {
+    private void setChannelInfo(String userId, String channelId, String channelName, String mode, String chatMode) {
 
         redisTemplate.opsForValue().set(USER_SELECT_CHANNEL_PREFIX + userId, channelId);
         HashOperations<String, String, List<Map<String, String>>> hashOps = redisTemplate.opsForHash();
@@ -491,6 +514,7 @@ public class ChatController {
         channel.setId(channelId);
         channel.setName(channelName);
         channel.setMode(mode);
+        channel.setChatMode(chatMode);
         String channelStr = JSON.toJSONString(channel);
 
         listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, channelStr);
@@ -516,6 +540,34 @@ public class ChatController {
         initConfig.getChatGPTStream().streamChatCompletion(Arrays.asList(message), listener);
 
         return sseEmitter;
+    }
+
+    // 流式 单次聊天调用
+    @PostMapping("/image")
+    @CrossOrigin
+    public Object image(@RequestBody Map<Object, Object> param, HttpServletRequest servletRequest) throws IOException {
+        String prompt = (String)param.get("msg");
+        String userId = (String)param.get("userId");
+        String clientIp = getClientIP(servletRequest);
+
+        log.info("userId: [{}], ip: [{}], param: [{}]进入image", userId, clientIp, prompt);
+
+        // 设置您的OpenAI API密钥
+        String apiKey = initConfig.getParamConfig().getApiKeys().get(0);
+
+        // 构建请求头
+        Headers headers = new Headers.Builder()
+                .add("Authorization", "Bearer " + apiKey)  // 添加Accept-Language头
+                .build();
+
+        // 构建请求体
+        String requestBodyContent = "{\"prompt\": \"" + prompt.trim() + "\", \"n\": 1, \"size\":\"256x256\"}"; // 根据实际需求替换为您的请求体内容
+        log.info(requestBodyContent);
+        okhttp3.RequestBody requestBody = okhttp3.RequestBody.create(requestBodyContent, MediaType.parse("application/json"));
+        Request request = new Request.Builder().url(IMAGE_OPENAI_URL).headers(headers).post(requestBody).build();
+        okhttp3.Response response = okHttpClient.newCall(request).execute();
+        String responseString = response.body().string();
+        return responseString;
     }
 
     private boolean checkUser(String userId) {
