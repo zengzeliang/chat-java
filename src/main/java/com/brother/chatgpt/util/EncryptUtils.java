@@ -1,11 +1,10 @@
 package com.brother.chatgpt.util;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class EncryptUtils {
@@ -14,10 +13,9 @@ public class EncryptUtils {
 
     static {
         try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128); // 128位密钥
-            secretKey = keyGenerator.generateKey();
-        } catch (NoSuchAlgorithmException e) {
+            byte[] keyBytes = "0123456789abcdef".getBytes("UTF-8");
+            secretKey = new SecretKeySpec(keyBytes, "AES");
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
@@ -25,7 +23,6 @@ public class EncryptUtils {
     public static String encrypt(String strToEncrypt) {
 
         try {
-
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             byte[] encryptedBytes = cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8));

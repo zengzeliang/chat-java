@@ -398,7 +398,13 @@ public class ChatController {
 
         if(targetChannel == null){
             targetChannel = new Channel(DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
-            listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, JSON.toJSONString(targetChannel));
+
+            try{
+                listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, 0, JSON.toJSONString(targetChannel));
+            }catch (Exception e){
+                log.warn("sseChat 解析出错...");
+                listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, JSON.toJSONString(targetChannel));
+            }
         }else{
             listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, index, JSON.toJSONString(targetChannel));
         }
@@ -548,7 +554,18 @@ public class ChatController {
         channel.setChatMode(chatMode);
         String channelStr = JSON.toJSONString(channel);
 
-        listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, channelStr);
+        if(channelId == DEFAULT_CHANNEL_ID){
+            List<Object> channelList = listOps.range(USER_CHAT_ID_CHANNEL_PREFIX + userId, 0, -1);
+
+            if(channelList == null || channelList.size() == 0){
+                listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, channelStr);
+            }else{
+                listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, 0, channelStr);
+            }
+        }else{
+            listOps.rightPush(USER_CHAT_ID_CHANNEL_PREFIX + userId, channelStr);
+        }
+
     }
 
     // 流式 单次聊天调用
