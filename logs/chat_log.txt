@@ -69,3 +69,40 @@
 2023-08-01 11:35:41.863  INFO 56148 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : o65llok09hMQYi2Zs5Rfb9RcjkM6W62xgpGXPlmJIHj+9A2tr8ZfcTpC+KeYG287
 2023-08-01 11:35:54.151  INFO 56148 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [CIla6mTOHN0tIQxZBwrZqw==]进入image
 2023-08-01 11:35:54.152  INFO 56148 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : o65llok09hMQYi2Zs5Rfb9RcjkM6W62xgpGXPlmJIHj+9A2tr8ZfcTpC+KeYG287
+2023-08-01 11:38:13.578  INFO 56438 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 56438 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-08-01 11:38:13.582  INFO 56438 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-08-01 11:38:14.446  INFO 56438 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-08-01 11:38:14.448  INFO 56438 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-08-01 11:38:14.474  INFO 56438 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2023-08-01 11:38:15.292  INFO 56438 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-08-01 11:38:15.299  INFO 56438 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-01 11:38:15.299  INFO 56438 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-08-01 11:38:15.412  INFO 56438 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-01 11:38:15.412  INFO 56438 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1781 ms
+2023-08-01 11:38:16.788  INFO 56438 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-08-01 11:38:16.993  INFO 56438 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-08-01 11:38:17.004  INFO 56438 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 4.143 seconds (JVM running for 5.378)
+2023-08-01 11:38:41.981  INFO 56438 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-01 11:38:41.982  INFO 56438 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-01 11:38:41.984  INFO 56438 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-01 11:38:42.005  WARN 56438 --- [http-nio-8081-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2023-08-01 11:38:43.616  WARN 56438 --- [http-nio-8081-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2023-08-01 11:39:06.499  INFO 56438 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-08-01 11:39:06.523  INFO 56438 --- [http-nio-8081-exec-9] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-08-01 11:39:11.142  INFO 56438 --- [http-nio-8081-exec-5] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-08-01 11:39:11.142  INFO 56438 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-08-01 11:39:20.824  INFO 56438 --- [http-nio-8081-exec-8] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [b4QCYrm6o36/BJMR9sifDQ==]进入image
+2023-08-01 11:39:20.824  INFO 56438 --- [http-nio-8081-exec-8] c.b.chatgpt.controller.ChatController    : 3pOlemmH5MUArAxEfD/XbFvUvy/5XT1KGzBEub0hKUVlYtOadmo0YTM2mQ2XLYVB4+R2rb+qzLn39fN3dxW3yg==
+2023-08-01 11:40:12.313  INFO 56644 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 56644 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-08-01 11:40:12.318  INFO 56644 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-08-01 11:40:13.424  INFO 56644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-08-01 11:40:13.427  INFO 56644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-08-01 11:40:13.453  INFO 56644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2023-08-01 11:40:14.140  INFO 56644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-08-01 11:40:14.148  INFO 56644 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-01 11:40:14.149  INFO 56644 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-08-01 11:40:14.273  INFO 56644 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-01 11:40:14.273  INFO 56644 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1878 ms
+2023-08-01 11:40:15.763  INFO 56644 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-08-01 11:40:15.956  INFO 56644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-08-01 11:40:15.967  INFO 56644 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 4.625 seconds (JVM running for 5.619)
