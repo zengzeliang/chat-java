@@ -1,58 +1,71 @@
-2023-07-29 12:28:26.136  INFO 37790 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 37790 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 12:28:26.142  INFO 37790 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 12:28:26.943  INFO 37790 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 12:28:26.947  INFO 37790 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 12:28:26.991  INFO 37790 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
-2023-07-29 12:28:35.525  INFO 37790 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 12:28:35.997  INFO 37790 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 10.245 seconds (JVM running for 11.505)
-2023-07-29 12:30:20.344  INFO 37921 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 37921 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 12:30:20.346  INFO 37921 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 12:30:20.951  INFO 37921 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 12:30:20.954  INFO 37921 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 12:30:20.982  INFO 37921 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
-2023-07-29 12:30:26.977  INFO 37921 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 12:30:27.383  INFO 37921 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 7.36 seconds (JVM running for 8.473)
-2023-07-29 12:30:37.511  INFO 37941 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 37941 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 12:30:37.512  INFO 37941 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 12:30:38.358  INFO 37941 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 12:30:38.361  INFO 37941 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 12:30:38.391  INFO 37941 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
-2023-07-29 12:30:47.256  INFO 37941 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 12:30:48.028  INFO 37941 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 11.006 seconds (JVM running for 12.474)
-2023-07-29 12:31:17.653  INFO 37994 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 37994 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 12:31:17.654  INFO 37994 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 12:31:18.243  INFO 37994 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 12:31:18.245  INFO 37994 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 12:31:18.266  INFO 37994 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2023-07-29 12:31:24.165  INFO 37994 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 12:31:24.625  INFO 37994 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 7.329 seconds (JVM running for 8.48)
-2023-07-29 17:38:46.973  INFO 38717 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 38717 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 17:38:46.976  INFO 38717 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 17:38:47.738  INFO 38717 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 17:38:47.742  INFO 38717 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 17:38:47.768  INFO 38717 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
-2023-07-29 17:38:56.980  INFO 38717 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 17:38:57.461  INFO 38717 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 10.898 seconds (JVM running for 11.999)
-2023-07-29 17:39:11.213  INFO 38753 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 38753 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 17:39:11.217  INFO 38753 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 17:39:11.804  INFO 38753 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 17:39:11.806  INFO 38753 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 17:39:11.828  INFO 38753 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2023-07-29 17:39:12.360  INFO 38753 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-07-29 17:39:12.371  INFO 38753 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-07-29 17:39:12.372  INFO 38753 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
-2023-07-29 17:39:12.513  INFO 38753 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-07-29 17:39:12.513  INFO 38753 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1246 ms
-2023-07-29 17:39:18.057  INFO 38753 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 17:39:18.274  INFO 38753 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2023-07-29 17:39:18.286  INFO 38753 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 7.536 seconds (JVM running for 8.348)
-2023-07-29 17:39:29.716  INFO 38753 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-29 17:39:29.717  INFO 38753 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-07-29 17:39:29.718  INFO 38753 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2023-07-29 17:44:19.683  INFO 39076 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 39076 (started by admin in /Users/admin/Desktop/chatgpt-java)
-2023-07-29 17:44:19.684  INFO 39076 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-07-29 17:44:20.262  INFO 39076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-29 17:44:20.265  INFO 39076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-07-29 17:44:20.285  INFO 39076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
-2023-07-29 17:44:24.970  INFO 39076 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-29 17:44:25.377  INFO 39076 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 6.061 seconds (JVM running for 7.281)
+2023-08-01 11:31:10.760  INFO 55561 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Starting ChatgptJavaApplicationTests using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 55561 (started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-08-01 11:31:10.767  INFO 55561 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-08-01 11:31:11.915  INFO 55561 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-08-01 11:31:11.920  INFO 55561 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-08-01 11:31:11.955  INFO 55561 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2023-08-01 11:31:15.500  INFO 55561 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-08-01 11:31:16.059  INFO 55561 --- [main] c.b.chatgpt.ChatgptJavaApplicationTests  : Started ChatgptJavaApplicationTests in 6.136 seconds (JVM running for 9.668)
+2023-08-01 11:32:13.752  INFO 55959 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 55959 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-08-01 11:32:13.758  INFO 55959 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-08-01 11:32:14.715  INFO 55959 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-08-01 11:32:14.717  INFO 55959 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-08-01 11:32:14.736  INFO 55959 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-08-01 11:32:15.253  INFO 55959 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-08-01 11:32:15.262  INFO 55959 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-01 11:32:15.262  INFO 55959 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-08-01 11:32:15.396  INFO 55959 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-01 11:32:15.396  INFO 55959 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1542 ms
+2023-08-01 11:32:16.691  INFO 55959 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-08-01 11:32:16.909  INFO 55959 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-08-01 11:32:16.921  INFO 55959 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 3.752 seconds (JVM running for 4.772)
+2023-08-01 11:32:31.394  INFO 55959 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-01 11:32:31.395  INFO 55959 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-01 11:32:31.395  INFO 55959 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-08-01 11:32:31.534  INFO 55959 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-08-01 11:32:31.567  INFO 55959 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-08-01 11:32:39.073  INFO 55959 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [zNkSeANebsT6uK05MK4mkA==]进入image
+2023-08-01 11:32:39.074  INFO 55959 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : 8cjfECBGlPltBANa+kIFlY8ByfdHW+LvB6I6IMuZsCSiC73Awn0/OjLIWoGQ07RG
+2023-08-01 11:33:58.526  INFO 56078 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 56078 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-08-01 11:33:58.529  INFO 56078 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-08-01 11:33:59.817  INFO 56078 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-08-01 11:33:59.825  INFO 56078 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-08-01 11:33:59.897  INFO 56078 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2023-08-01 11:34:00.630  INFO 56078 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-08-01 11:34:00.637  INFO 56078 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-01 11:34:00.637  INFO 56078 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-08-01 11:34:00.756  INFO 56078 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-01 11:34:00.756  INFO 56078 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2155 ms
+2023-08-01 11:34:02.196  INFO 56078 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-08-01 11:34:02.441  INFO 56078 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-08-01 11:34:02.458  INFO 56078 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 4.311 seconds (JVM running for 5.153)
+2023-08-01 11:34:07.660  INFO 56078 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-01 11:34:07.661  INFO 56078 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-01 11:34:07.664  INFO 56078 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-08-01 11:34:07.798  INFO 56078 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-08-01 11:34:07.808  INFO 56078 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-08-01 11:34:13.396  INFO 56078 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [zNkSeANebsT6uK05MK4mkA==]进入image
+2023-08-01 11:34:13.397  INFO 56078 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : 8cjfECBGlPltBANa+kIFlY8ByfdHW+LvB6I6IMuZsCSCdLjPapOxOl8KElqpLmqN
+2023-08-01 11:34:51.043  INFO 56148 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Starting ChatgptJavaApplication using Java 1.8.0_291 on ZELIANGZENG-MB7 with PID 56148 (/Users/admin/Desktop/chatgpt-java/target/classes started by admin in /Users/admin/Desktop/chatgpt-java)
+2023-08-01 11:34:51.045  INFO 56148 --- [main] c.b.chatgpt.ChatgptJavaApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-08-01 11:34:52.275  INFO 56148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-08-01 11:34:52.277  INFO 56148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-08-01 11:34:52.297  INFO 56148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-08-01 11:34:52.688  INFO 56148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-08-01 11:34:52.695  INFO 56148 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-01 11:34:52.695  INFO 56148 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2023-08-01 11:34:52.804  INFO 56148 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-01 11:34:52.804  INFO 56148 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1716 ms
+2023-08-01 11:34:54.329  INFO 56148 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-08-01 11:34:54.533  INFO 56148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-08-01 11:34:54.545  INFO 56148 --- [main] c.b.chatgpt.ChatgptJavaApplication       : Started ChatgptJavaApplication in 3.273 seconds (JVM running for 3.854)
+2023-08-01 11:35:24.223  INFO 56148 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-01 11:35:24.224  INFO 56148 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-01 11:35:24.226  INFO 56148 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-08-01 11:35:24.373  INFO 56148 --- [http-nio-8081-exec-7] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadHistory 
+2023-08-01 11:35:24.393  INFO 56148 --- [http-nio-8081-exec-6] c.b.chatgpt.controller.ChatController    : userId: [zzl]进入loadChats
+2023-08-01 11:35:27.083  INFO 56148 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [zNkSeANebsT6uK05MK4mkA==]进入image
+2023-08-01 11:35:27.084  INFO 56148 --- [http-nio-8081-exec-10] c.b.chatgpt.controller.ChatController    : 8cjfECBGlPltBANa+kIFlY8ByfdHW+LvB6I6IMuZsCS4YK8MpiTQ4cfxIMglACYf
+2023-08-01 11:35:41.862  INFO 56148 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [CIla6mTOHN0tIQxZBwrZqw==]进入image
+2023-08-01 11:35:41.863  INFO 56148 --- [http-nio-8081-exec-1] c.b.chatgpt.controller.ChatController    : o65llok09hMQYi2Zs5Rfb9RcjkM6W62xgpGXPlmJIHj+9A2tr8ZfcTpC+KeYG287
+2023-08-01 11:35:54.151  INFO 56148 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : userId: [zzl], ip: [0:0:0:0:0:0:0:1], param: [CIla6mTOHN0tIQxZBwrZqw==]进入image
+2023-08-01 11:35:54.152  INFO 56148 --- [http-nio-8081-exec-2] c.b.chatgpt.controller.ChatController    : o65llok09hMQYi2Zs5Rfb9RcjkM6W62xgpGXPlmJIHj+9A2tr8ZfcTpC+KeYG287

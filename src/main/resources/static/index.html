@@ -1486,7 +1486,14 @@
                 }
                 let div =  document.createElement('div');
                 const responseUrl = response.data[0].url;
-                div.innerHTML = marked.marked("<img src = '" + responseUrl + "'/>");
+
+                // 设置div元素的样式
+                div.style.width = '256px';
+                div.style.height = '256px';
+                div.style.backgroundImage = `url(${responseUrl})`;
+                div.style.backgroundSize = 'cover';
+
+                // div.innerHTML = marked.marked("<img src = '" + responseUrl + "'/>");
                 chat_item.find(".bubble").empty();
                 chat_item.find(".bubble").append(div);
                 $(".content").scrollTop($(".content")[0].scrollHeight);

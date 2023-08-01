@@ -609,7 +609,7 @@ public class ChatController {
                 .build();
 
         // 构建请求体
-        String requestBodyContent = "{\"prompt\": \"" + prompt.trim() + "\", \"n\": 1, \"size\":\"256x256\"}"; // 根据实际需求替换为您的请求体内容
+        String requestBodyContent = "{\"prompt\": \"" + prompt.trim() + "\", \"n\": 1, \"size\":\"1024*1024\"}"; // 根据实际需求替换为您的请求体内容
         log.info(EncryptUtils.encrypt(requestBodyContent));
         okhttp3.RequestBody requestBody = okhttp3.RequestBody.create(requestBodyContent, MediaType.parse("application/json"));
         Request request = new Request.Builder().url(IMAGE_OPENAI_URL).headers(headers).post(requestBody).build();

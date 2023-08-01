@@ -23,7 +23,7 @@ import java.util.Arrays;
 class ChatgptJavaApplicationTests {
 
     @Test
-    void contextLoads() throws NoSuchAlgorithmException {
+    void contextLoads() {
 
         String serict = EncryptUtils.encrypt("hello");
 
