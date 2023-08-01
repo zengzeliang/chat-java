@@ -968,7 +968,8 @@
                 if(chats.length === 0){     // 表示是未绑定用户状态
                     $("#del-btn").hide();
                     // $("#chmod-btn").hide();
-                    $("#image-btn").hide();
+                    // $("#image-btn").hide();
+                    $("#image-btn").text("当前为生成文字");
                     $(".chat-list").hide();
                 } else {
                     $(".chat-list").append(html);
@@ -1232,7 +1233,7 @@
         }
 
         let userId = localStorage.getItem("userId") == null ? "" : localStorage.getItem("userId");
-        if(getSelectedChatInfo().chatMode === "picture"){
+        if(getSelectedChatInfo().chatMode === "picture" || $("#image-btn").text() === "当前为生成图片"){
             generatePicture(text);
             return;
         }
@@ -1548,18 +1549,28 @@
 
     $('#image-btn').click(function () {
         let chat_info = getSelectedChatInfo();
-        if (!("chatMode" in chat_info)){
-            chat_info["chatMode"] = "text";
-        }
         let display_content = "";
-        if(chat_info["chatMode"]==="picture"){
-            chat_info["chatMode"] = "text";
-            display_content = "切换为生成文字";
-            $("#image-btn").text("当前为生成文字");
-        } else {
-            chat_info["chatMode"] = "picture";
-            display_content = "切换为生成图片";
-            $("#image-btn").text("当前为生成图片");
+        if(Object.keys(chat_info).length != 0){
+            if (!("chatMode" in chat_info)){
+                chat_info["chatMode"] = "text";
+            }
+            if(chat_info["chatMode"]==="picture"){
+                chat_info["chatMode"] = "text";
+                display_content = "切换为生成文字";
+                $("#image-btn").text("当前为生成文字");
+            } else {
+                chat_info["chatMode"] = "picture";
+                display_content = "切换为生成图片";
+                $("#image-btn").text("当前为生成图片");
+            }
+        }else{
+            if($("#image-btn").text() == "当前为生成图片"){
+                display_content = "当前为生成文字";
+                $("#image-btn").text("当前为生成文字");
+            }else{
+                display_content = "当前为生成图片";
+                $("#image-btn").text("当前为生成图片");
+            }
         }
 
         var html = '<div class="item item-center"><span>'+display_content+'</span></div>'
