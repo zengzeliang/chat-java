@@ -10,7 +10,7 @@ public class UserInfo {
     private String userId;
     private String password;
     private Integer buy;
-    private Date timestamp;
+    private String createTime;
     private Integer state;
 
 

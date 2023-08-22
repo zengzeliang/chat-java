@@ -331,6 +331,10 @@
             height: 2em;
         }
 
+        .svg-icon1 {
+            transform: scale(0.8); /* 将图标缩小为原来的80% */
+        }
+
         .svg-icon:hover path,
         .svg-icon:hover polygon,
         .svg-icon:hover rect {
@@ -370,6 +374,16 @@
             }
         }
         #settings-dialog {
+            display: none;
+            position: absolute;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            border: 2px solid #ccc;
+            z-index: 2; /* Sit on top */
+        }
+
+        #buy-dialog {
             display: none;
             position: absolute;
             border-radius: 5px;
@@ -418,6 +432,22 @@
             align-items: center;
         }
 
+        .buy-close-btn{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox input {
+            margin-right: 5px;
+        }
+
         .setting-label{
             font-size: 18px;
             font-family: “Arial”,”Microsoft YaHei”,”黑体”,”宋体”,sans-serif;
@@ -427,6 +457,10 @@
         .setting-sub-label{
             font-size: 12px;
             color: #9e9e9e;
+        }
+        .setting-container {
+            text-align: left;
+            margin-left: 0;
         }
         .label-svg-button{
             display: flex;
@@ -501,6 +535,25 @@
         }
         $("#settings-dialog").toggle();
     }
+
+    function toggle_buy_dialog() {
+        if($("#buy-dialog").css("display") === "none"){
+            let top = $(".content").offset().top;
+            let left = $(".content").offset().left;
+            let width = $(".content").width();
+            let height = $(".content").height()+$(".input-area").height();
+            $("#buy-dialog").css("top", top);
+            $("#buy-dialog").css("left", left);
+            $("#buy-dialog").css("width", width);
+            $("#buy-dialog").css("height", height);
+        } else {
+            // 获取设置值
+            console.log("关闭设置");
+        }
+        $("#buy-dialog").toggle();
+
+    }
+
     $(document).ready(function () {
         $("#toggle-chats-btn").click(function () {
             $(".left-container").toggle();
@@ -508,7 +561,81 @@
         $("#toggle-setting-btn").click(function () {
             toggle_settings_dialog();
         });
+        $("#toggle-buy-btn").click(function () {
+            toggle_buy_dialog();
+        });
     });
+
+    // 校验手机号是否正确
+    function checkPhone(buyPhone) {
+        // 使用正则表达式校验手机号
+        let pattern = /^(?:(?:\+|00)(?:[1-9]\d{0,2}))?[1-9]\d{6,14}$/;
+        return pattern.test(buyPhone);
+    }
+
+    function initSetting(buyPhone, buyPassword) {
+        let headers = createHeaders();
+        headers["Content-Type"] = "application/json";
+        // 先模拟发送chat: user命令，如果存在不做处理
+        // 设置用户信息
+        $.ajax({
+            url: baseUrl + "/setUserId",
+            type: "Post",
+            headers: headers,
+            dataType: "json",
+            data: JSON.stringify({"userId": buyPhone, "password": buyPassword}),
+            success: function (data) {
+                console.log("initSetting", data);
+            }
+        });
+    }
+
+    function confirmBuy(){
+
+        let buyPhone = $("#buy-phone").val().trim();
+        let buyPassword = $("#buy-password").val().trim();
+        if(buyPhone === undefined || buyPhone === "" || buyPassword === undefined || buyPassword === ""){
+            alert("手机号或密码不能为空");
+            return;
+        }
+        if(!checkPhone(buyPhone)){
+            alert("手机号格式错误");
+            return;
+        }
+
+        if(document.querySelector('input[name="pay"]:checked') == null){
+            alert("请选择支付方式");
+            return;
+        }
+        // 获取当前选择的支付方式
+        let selectedPayType = document.querySelector('input[name="pay"]:checked').value;
+
+        if(selectedPayType === "wechat_h5"){
+            alert("暂不支持微信支付");
+        }else if(selectedPayType === "alipay_h5"){
+            // 选择支付宝支付
+            let headers = createHeaders();
+            headers["Content-Type"] = "application/json";
+            $.ajax({
+                url: baseUrl + "/payment/goAlipay",
+                type: "Post",
+                headers: headers,
+                dataType: "json",
+                data: JSON.stringify({"buyPhone": buyPhone, "buyPassword": buyPassword}),
+                success: function (data) {
+                    if(data.code === 200){
+                        // 保存设置
+                        localStorage.setItem("userId", buyPhone);
+                        localStorage.setItem("password", buyPassword);
+                        initSetting(buyPhone, buyPassword);
+                        document.write(data.data);
+                    }else {
+                        alert("下单失败，请重试!" + data.message);
+                    }
+                }
+            });
+        }
+    }
 
     function confirmSetting(){
         let userId = "";
@@ -521,15 +648,12 @@
         }
 
         let user_change_flag = true;
-        // if (userId !== $("#user-id").val().trim()){
-        //     user_change_flag = true;
-        // }
 
         userId = $("#user-id").val().trim();
         password = $("#password").val().trim();
 
-        if(userId === ""){
-            alert("userID不能为空");
+        if(userId === "" || password === ""){
+            alert("手机号或密码不能为空");
             return;
         }
 
@@ -543,13 +667,17 @@
                 type: "Post",
                 headers: headers,
                 dataType: "json",
-                data: JSON.stringify({"userId": userId}),
+                data: JSON.stringify({"userId": userId, "password": password}),
                 success: function (data) {
-                    // 保存设置
-                    localStorage.setItem("userId", userId);
-                    localStorage.setItem("password", password);
-                    alert("设置成功");
-                    setSuccess = true;
+                    if(data.code === 200){
+                        // 保存设置
+                        localStorage.setItem("userId", userId);
+                        localStorage.setItem("password", password);
+                        setSuccess = true;
+                        alert("设置成功");
+                    }else{
+                        alert("授权号或密码错误，请购买后再设置!");
+                    }
                 }
             });
         }else{
@@ -574,7 +702,7 @@
                 </div>
                 <div class="setting">
                     <div class="setting-label">
-                        <div>用户ID</div>
+                        <div>手机号</div>
                         <div class="setting-sub-label">
                             用于授权服务
                         </div>
@@ -603,10 +731,79 @@
             </div>
         </div>
     </div>
+
+    <div id="buy-dialog">
+        <div class="buy-close-btn" onclick="toggle_buy_dialog()">
+            <svg class="svg-icon" viewBox="0 0 20 20">
+                <path fill="none" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+            </svg>
+        </div>
+        <div class="setting-menus">
+            <div class="setting-menu">
+                <div class="setting-label" style="font-size: 30px">
+                    购买
+                </div>
+                <div class="setting">
+                    <div class="setting-label">
+                        <div>手机号</div>
+                        <div class="setting-sub-label">
+                            用于授权服务
+                        </div>
+                    </div>
+                    <input type="text" id="buy-phone" name="buy_phone">
+                </div>
+                <div class="setting">
+                    <div class="setting-label">
+                        <div>密码</div>
+                        <div class="setting-sub-label">
+                            访问密码
+                        </div>
+                    </div>
+                    <input type="password" id="buy-password" name="buy_password">
+                </div>
+<!--                <div class="setting">-->
+<!--                    <div class="setting-label">-->
+<!--                        <div>确认密码</div>-->
+<!--                        <div class="setting-sub-label">-->
+<!--                            确认密码-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <input type="password" id="buy-confirm-password" name="buy_confirm_password">-->
+<!--                </div>-->
+                <div class="setting">
+                    <div class="setting-label">
+                        <div>支付方式</div>
+                        <div class="setting-sub-label">
+                            选择支付方式
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <input onclick="getPayType()" class="choose" id="zhifubao" name="pay" type="radio" checked value="alipay_h5">
+                        <label for="zhifubao">支付宝</label>
+                    </div>
+                    <div class="checkbox">
+                        <input onclick="getPayType()" class="choose" id="wechat" name="pay" type="radio" value="wechat_h5">
+                        <label for="wechat">微信</label>
+                    </div>
+                </div>
+                <button class="confirmSettings" onclick="confirmBuy()">确认支付</button>
+            </div>
+
+            <div class="setting-container">
+                <br>
+                <div class="setting-sub-label">本网站长期维护，购买后可以支持以下功能(核对金额0.99元):</div>
+                <div class="setting-sub-label">1. 连续对话，会针对历史对话进行更智能回答</div>
+                <div class="setting-sub-label">2. 消息保存，每个会话可以长期保存最近100条消息</div>
+                <div class="setting-sub-label">3. 添加新的对话，支持对话分类，将不同对话分类为不同类型</div>
+                <div class="setting-sub-label"></div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="left-container">
         <div class="chat-list">
             <div class="newchat" id="newchat">添加新的对话</div>
-
         </div>
     </div>
     <div class="right-container">
@@ -627,6 +824,15 @@
 <!--                            <img class="svg-icon" viewBox="-2 -2 20 20" src="static/email.svg"/>-->
 <!--                        </div>-->
 <!--                    </a>-->
+
+                    <div class="toggle-btn" id="toggle-buy-btn">
+<!--                        <image class="svg-icon" viewBox="0 0 20 20"  src="static/cart.svg"/>-->
+                        <svg class="svg-icon svg-icon1" viewBox="0 0 32 32">
+                            <path d="M30.549 6.077c-1.062-0.303-2.169 0.312-2.473 1.374l-0.157 0.549h-18.654l-0.281-2.248c-0.125-1.001-0.976-1.752-1.985-1.752h-5c-1.105 0-2 0.895-2 2s0.895 2 2 2h3.234l1.781 14.248c0.125 1.001 0.976 1.752 1.985 1.752h17c0.893 0 1.678-0.592 1.923-1.451l4-14c0.303-1.062-0.312-2.169-1.374-2.473zM16 16v-2h4v2h-4zM20 18v2h-4v-2h4zM16 12v-2h4v2h-4zM9.516 10h4.484v2h-4.234l-0.25-2zM10.016 14h3.984v2h-3.734l-0.25-2zM10.516 18h3.484v2h-3.234l-0.25-2zM24.491 20h-2.491v-2h3.063l-0.571 2zM25.634 16h-3.634v-2h4.206l-0.571 2zM26.777 12h-4.777v-2h5.349l-0.571 2zM8 29c0-1.657 1.343-3 3-3s3 1.343 3 3c0 1.657-1.343 3-3 3s-3-1.343-3-3zM20 29c0-1.657 1.343-3 3-3s3 1.343 3 3c0 1.657-1.343 3-3 3s-3-1.343-3-3z"></path>
+                        </svg>
+
+                    </div>
+
                     <div class="toggle-btn" id="toggle-chats-btn">
                         <svg class="svg-icon" viewBox="0 0 20 20">
                             <path d="M10,1.445c-4.726,0-8.555,3.829-8.555,8.555c0,4.725,3.829,8.555,8.555,8.555c4.725,0,8.555-3.83,8.555-8.555C18.555,5.274,14.725,1.445,10,1.445 M10,17.654c-4.221,0-7.654-3.434-7.654-7.654c0-4.221,3.433-7.654,7.654-7.654c4.222,0,7.654,3.433,7.654,7.654C17.654,14.221,14.222,17.654,10,17.654 M14.39,10c0,0.248-0.203,0.45-0.45,0.45H6.06c-0.248,0-0.45-0.203-0.45-0.45s0.203-0.45,0.45-0.45h7.879C14.187,9.55,14.39,9.752,14.39,10 M14.39,12.702c0,0.247-0.203,0.449-0.45,0.449H6.06c-0.248,0-0.45-0.202-0.45-0.449c0-0.248,0.203-0.451,0.45-0.451h7.879C14.187,12.251,14.39,12.454,14.39,12.702 M14.39,7.298c0,0.248-0.203,0.45-0.45,0.45H6.06c-0.248,0-0.45-0.203-0.45-0.45s0.203-0.45,0.45-0.45h7.879C14.187,6.848,14.39,7.051,14.39,7.298"></path>
@@ -685,10 +891,7 @@
     function createHeaders() {
         return {};
     }
-    // let baseUrl = "http://localhost:8081";
     let baseUrl = "";
-    // let baseUrl = "http://82.156.167.18:2023";
-    // let imageUrl = "http://82.156.167.:9298";
 
     // 当鼠标移动到 bubble-left时显示复制按钮
     $(document).on("mouseover", ".bubble-left", function () {
@@ -896,7 +1099,7 @@
 
         if (chats.length === 0) {   // 未登陆或授权
             $(".head-chat-name").text("未授权");
-            $(".head-chat-info").text("您尚未授权，请在设置中设置任意userID，解锁连续对话等更多功能");
+            $(".head-chat-info").text("您尚未授权，请购买后进行设置解锁连续对话等更多功能");
         } else {
             let selectChatInfo = getSelectedChatInfo()
 
@@ -907,17 +1110,6 @@
             // 判断 messages_of_chats 中是否存在selectedChatId
             $(".head-chat-info").text("共有" + (selectChatInfo.messages_total + 1) + "条消息");
         }
-    }
-    function generateUUID() {
-        let uuid = '', i, random
-        for (i = 0; i < 32; i++) {
-            random = Math.random() * 16 | 0
-            if (i === 8 || i === 12 || i === 16 || i === 20) {
-                uuid += '-'
-            }
-            uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random)).toString(16)
-        }
-        return uuid
     }
 
     // getMode();
@@ -936,53 +1128,60 @@
         userId = localStorage.getItem("userId");
     }
 
+    let password = "";
+    if (localStorage.getItem("password") != null){
+        password = localStorage.getItem("password");
+    }
+
     function loadChats() {
         console.log("start load chats");
         $.ajax({
             url: baseUrl + "/loadChats",
             type: "Get",
             dataType: "json",
-            data: {"userId": userId},
+            data: {"userId": userId, "password": password},
             success: function (data) {
-                console.log(data);
-                let html = "";
-                chats = data.data;
-                for (let i = 0; i < chats.length; i++) {
-                    console.log(chats[i].name)
-                    console.log(chats[i].selected)
-                    if(chats[i].selected === true){
-                        selectedChatId = chats[i].id;
-                        // if(chats[i]["mode"]==="normal"){
-                        //     $("#chmod-btn").text("当前为普通对话");
-                        // } else {
-                        //     $("#chmod-btn").text("当前为连续对话");
-                        // }
-                        if(chats[i]["chatMode"] == "picture"){
-                            $("#image-btn").text("当前为生成图片");
-                        }else{
-                            $("#image-btn").text("当前为生成文字");
+                if(data.code === 200){
+                    console.log(data);
+                    let html = "";
+                    chats = data.data;
+                    for (let i = 0; i < chats.length; i++) {
+                        console.log(chats[i].name)
+                        console.log(chats[i].selected)
+                        if(chats[i].selected === true){
+                            selectedChatId = chats[i].id;
+                            // if(chats[i]["mode"]==="normal"){
+                            //     $("#chmod-btn").text("当前为普通对话");
+                            // } else {
+                            //     $("#chmod-btn").text("当前为连续对话");
+                            // }
+                            if(chats[i]["chatMode"] == "picture"){
+                                $("#image-btn").text("当前为生成图片");
+                            }else{
+                                $("#image-btn").text("当前为生成文字");
+                            }
+                        }
+                        html += '<div class="chat" id='+chats[i].id+' data-name='+chats[i].name+' data-selected='+chats[i].selected+' data-messages_total='+chats[i].messages_total+'>' + chats[i].name + '</div>';
+                    }
+                    if(chats.length === 0){     // 表示是未绑定用户状态
+                        $("#del-btn").hide();
+                        // $("#chmod-btn").hide();
+                        // $("#image-btn").hide();
+                        $("#image-btn").text("当前为生成文字");
+                        $(".chat-list").hide();
+                    } else {
+                        $(".chat-list").append(html);
+                        $(".chat-list").append(newchat);
+                        // 将选中的selectedChat添加selected属性
+                        $("#"+selectedChatId).addClass("selected");
+                        if ($("#"+selectedChatId).data('name')!=='默认对话'){
+                            $("#del-btn").html("删除对话");
+                        } else {
+                            $("#del-btn").html("删除聊天记录");
                         }
                     }
-                    html += '<div class="chat" id='+chats[i].id+' data-name='+chats[i].name+' data-selected='+chats[i].selected+' data-messages_total='+chats[i].messages_total+'>' + chats[i].name + '</div>';
+                    renderHeadInfo();
                 }
-                if(chats.length === 0){     // 表示是未绑定用户状态
-                    $("#del-btn").hide();
-                    // $("#chmod-btn").hide();
-                    // $("#image-btn").hide();
-                    $("#image-btn").text("当前为生成文字");
-                    $(".chat-list").hide();
-                } else {
-                    $(".chat-list").append(html);
-                    $(".chat-list").append(newchat);
-                    // 将选中的selectedChat添加selected属性
-                    $("#"+selectedChatId).addClass("selected");
-                    if ($("#"+selectedChatId).data('name')!=='默认对话'){
-                        $("#del-btn").html("删除对话");
-                    } else {
-                        $("#del-btn").html("删除聊天记录");
-                    }
-                }
-                renderHeadInfo();
             }
         })
     }
@@ -1000,6 +1199,11 @@
             userId = localStorage.getItem("userId");
         }
 
+        let password = "";
+        if (localStorage.getItem("password") != null){
+            password = localStorage.getItem("password");
+        }
+
         $.ajax({
             url: baseUrl + "/newChat",
             type: "Get",
@@ -1008,10 +1212,11 @@
             data: {
                 "name": name,
                 "userId": userId,
+                "password": password,
             },
             success: function (data) {
                 console.log(data);
-                if (data.code === 200 || data.code === 201) {
+                if (data.code === 200) {
                     let html = '<div class="chat" id='+data.data.id+' data-name='+data.data.name+' data-selected='+data.data.selected+' data-messages_total='+data.data.messages_total+'>' + data.data.name + '</div>';
                     // newchat.remove();
                     $(".chat-list").append(html);
@@ -1037,6 +1242,8 @@
                     }
                     loadHistory();
                     renderHeadInfo();
+                }else{
+                    alert("未授权，请设置授权id后重试");
                 }
             }
         })
@@ -1055,6 +1262,7 @@
             data: {     // get 方法时 data放置于路径 ?id=
                 "id": id,
                 "userId": userId,
+                "password": password,
             },
             success: function (data) {
                 console.log(data);
@@ -1063,7 +1271,7 @@
                 if(data.code == 201){
                     // 未登录
                     // 用户id已经存在
-                    html = '<div class="item item-center"><span>' + '未登录，请执行set:xxx，xxx为userId' + '</span></div>';
+                    html = '<div class="item item-center"><span>' + '未授权，请设置授权id后重试' + '</span></div>';
                     $(".content").append(html);
                     $(".content").scrollTop($(".content")[0].scrollHeight);
                 }
@@ -1117,7 +1325,7 @@
             url: baseUrl + "/loadHistory",
             type: "Get",
             dataType: "json",
-            data: {"userId": userId},
+            data: {"userId": userId, "password": password},
             success: function (data) {
                 console.log(data);
                 let messages = [];
@@ -1212,7 +1420,7 @@
 
     function deleteHistory(userId) {
         return new Promise((resolve, reject) => {
-            $.get(baseUrl + "/deleteHistory?userId=" + userId, function (data) {
+            $.get(baseUrl + "/deleteHistory?userId=" + userId + "&password=" + password, function (data) {
                 console.log(data);
                 resolve();
             }).fail(function (error) {
@@ -1298,6 +1506,7 @@
             "channelId": selectedChatId,
             "mode": getSelectedChatInfo().mode ? getSelectedChatInfo().mode : "normal",
             "chatMode": getSelectedChatInfo().chatMode ? getSelectedChatInfo().chatMode : "text",
+            "password": password,
         };
 
         console.log("[Request]");
@@ -1577,5 +1786,11 @@
         $(".content").append(html);
         $(".content").scrollTop($(".content")[0].scrollHeight);
     });
+
+    // 获取支付类型
+    function getPayType() {
+        var selectedPayType = document.querySelector('input[name="pay"]:checked').value;
+        console.log(selectedPayType);
+    }
 </script>
 </html>

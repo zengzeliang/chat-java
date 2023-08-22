@@ -1,5 +1,9 @@
 package com.brother.chatgpt.config;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.AlipayConfig;
+import com.alipay.api.DefaultAlipayClient;
 import com.brother.chatgpt.enums.ProxyTypeEnum;
 import com.plexpt.chatgpt.ChatGPT;
 import com.plexpt.chatgpt.ChatGPTStream;
@@ -80,6 +84,34 @@ public class InitConfig {
         OkHttpClient client = new OkHttpClient().newBuilder().proxy(proxy).connectionPool(connectionPool)
                 .build();
         return client;
+    }
+
+    @Bean
+    public AlipayConfig alipayConfig(AliPayResource aliPayResource){
+
+        AlipayConfig alipayConfig = new AlipayConfig();
+        //设置网关地址
+        alipayConfig.setServerUrl(aliPayResource.getGatewayUrl());
+        //设置应用ID
+        alipayConfig.setAppId(aliPayResource.getAppId());
+        //设置应用私钥
+        alipayConfig.setPrivateKey(aliPayResource.getMerchantPrivateKey());
+        //设置请求格式，固定值json
+        alipayConfig.setFormat("json");
+        //设置字符集
+        alipayConfig.setCharset(aliPayResource.getCharset());
+        //设置签名类型
+        alipayConfig.setSignType(aliPayResource.getSignType());
+        //设置支付宝公钥
+        alipayConfig.setAlipayPublicKey(aliPayResource.getAlipayPublicKey());
+        return alipayConfig;
+    }
+
+    @Bean
+    public AlipayClient alipayClient(AlipayConfig alipayConfig) throws AlipayApiException {
+        //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig);
+        return alipayClient;
     }
 
     @Override

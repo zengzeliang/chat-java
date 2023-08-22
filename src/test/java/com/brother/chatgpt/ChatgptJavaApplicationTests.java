@@ -27,7 +27,9 @@ class ChatgptJavaApplicationTests {
 
         String serict = EncryptUtils.encrypt("hello");
 
-        String ans = EncryptUtils.decrypt(serict);
+        String a = "8m+HjdLZKCDWvR1lUsQvq1rBIlj1jETvUxsKRhhjaQb05InIOPPO2Q731btxqknRPrzCUEo6t7q3UuachUOB8c1+Jbk+ROC9c8KVouk0IhnhWZq9kIVo/m4kg3tg5R7Uu/DQ0POtIb+n4WWBdTMXeh1+5cU+GmksktZCS6E1eEafMjFQRnE0jQp7xE/LABoR+cBlq+fU86jH/BgYokPyZUU0uohqaRt/eR6DLLLh+4mBxThXN8qhYYv1V4j8966T3hovBjU6+MebHsNhcCOvbHY0/a+X4rRWe+F61vL0NXBWrSHLY8xYlq+vEvnqU8LzfsvVzUNJKYrcP3Nryaf5hG9NGAU1fjPQlwqv7GhcWoJhc/kKzy+jdvefKc4yMGLFT6yxi4eseagT39oV/iPkCg";
+
+        String ans = EncryptUtils.decrypt(a);
 
 
         System.out.println(serict);

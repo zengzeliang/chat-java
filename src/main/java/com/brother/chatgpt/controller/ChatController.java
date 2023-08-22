@@ -5,6 +5,7 @@ import com.brother.chatgpt.bean.Channel;
 import com.brother.chatgpt.bean.UserInfo;
 import com.brother.chatgpt.config.InitConfig;
 import com.brother.chatgpt.enums.RecordMessageTypeEnum;
+import com.brother.chatgpt.service.UserInfoService;
 import com.brother.chatgpt.util.EncryptUtils;
 import com.plexpt.chatgpt.entity.chat.ChatCompletion;
 import com.plexpt.chatgpt.entity.chat.ChatCompletionResponse;
@@ -47,6 +48,9 @@ public class ChatController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private UserInfoService userInfoService;
+
     @Resource
     private JdbcTemplate jdbcTemplate;
 
@@ -69,6 +73,8 @@ public class ChatController {
     private static final String USER_SELECT_CHANNEL_PREFIX = "select_channel";
 
     private static final String IMAGE_OPENAI_URL = "https://api.openai.com/v1/images/generations";
+
+    private static final Integer PRE_MYSQL_ID = 123;
 
     // 非流式 单次聊天调用
     @GetMapping("/chat")
@@ -116,12 +122,12 @@ public class ChatController {
         // 加载
     @GetMapping("/loadChats")
     @CrossOrigin
-    public Object loadChats(String userId){
+    public Object loadChats(String userId, String password){
         Map<String, Object> result = new HashMap<>();
         List<Map> data = new ArrayList<>();
 
         // 用户校验不通过，返回空聊天窗口
-        if(!checkUser(userId)){
+        if(!checkUser(userId, password)){
             result.put("code", 201);
             result.put("data", data);
             result.put("message", "用户校验失败");
@@ -170,12 +176,12 @@ public class ChatController {
     // 创建新的聊天窗口
     @GetMapping("/newChat")
     @CrossOrigin
-    public Object newChat(String name, String userId){
+    public Object newChat(String name, String userId, String password){
         log.info("userId: [{}]进入newChat name: [{}]", userId, name);
         Map<String, Object> result = new HashMap<>();
 
         // 用户校验不通过
-        if(!checkUser(userId)){
+        if(!checkUser(userId, password)){
             result.put("code", 201);
             result.put("message", "请先创建或输入已有用户id");
             return result;
@@ -201,11 +207,11 @@ public class ChatController {
     // 选择chat channel
     @GetMapping("/selectChat")
     @CrossOrigin
-    public Object selectChat(String userId, String id) {
+    public Object selectChat(String userId, String id, String password) {
         log.info("userId: [{}]进入selectChat ", userId);
         Map<String, Object> result = new HashMap<>();
 
-        if(!checkUser(userId)){
+        if(!checkUser(userId, password)){
             result.put("code", 201);
             result.put("message", "请先创建或输入已有用户id");
             return result;
@@ -220,12 +226,12 @@ public class ChatController {
     // 加载
     @GetMapping("/loadHistory")
     @CrossOrigin
-    public Object loadHistory(String userId){
+    public Object loadHistory(String userId, String password){
         log.info("userId: [{}]进入loadHistory ", userId);
         Map<String, Object> result = new HashMap<>();
 
         // 用户校验不通过
-        if(!checkUser(userId)){
+        if(!checkUser(userId, password)){
             result.put("code", 201);
             result.put("message", "请先创建或输入已有用户id");
             return result;
@@ -252,44 +258,51 @@ public class ChatController {
     @CrossOrigin
     public Object userId(@RequestBody Map<String, Object> param) {
         String userId = (String) param.get("userId");
-
+        String password = (String) param.get("password");
         log.info("进入setUserId, {}", param);
-
+        Map<String, Object> result = new HashMap<>();
         if(Strings.isEmpty(userId)){
-            Map<String, Object> result = new HashMap<>();
             result.put("code", 202);
             result.put("message", "userId不能为空");
             return result;
         }
-
-        boolean userExist = redisTemplate.hasKey(USER_CHAT_ID_MESSAGE_PREFIX + userId);
-
-        if(userExist){
-            Map<String, Object> result = new HashMap<>();
+        // 兼容旧账号，根据userId查一遍
+        UserInfo userInfoByUserId = userInfoService.getUserInfoByUserId(userId);
+        if(userInfoByUserId == null){
             result.put("code", 201);
-            result.put("message", "userId已经存在");
+            result.put("message", "用户id不存在");
             return result;
+        }
+
+        if(userInfoByUserId.getId() >= PRE_MYSQL_ID){
+            // 新版账号
+            // 根据用户名和密码判断是否已经购买
+            UserInfo userInfo = userInfoService.getUserInfoByUserIdAndPass(userId, password);
+            boolean userExist = redisTemplate.hasKey(USER_CHAT_ID_MESSAGE_PREFIX + userId);
+            if(!userExist){
+                // 设置默认channel
+                setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
+            }// 设置默认channel
+            if(userInfo == null){
+                // 查看redis中是否存在
+                result.put("code", 201);
+                result.put("message", "用户信息未查询到");
+            }else{
+                // 查看redis中是否存在
+                result.put("code", 200);
+                result.put("message", "success");
+            }
+            return result;
+
         }else{
-            // 设置默认channel
-            setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
-            Map<String, Object> result = new HashMap<>();
+            // 查看redis中是否存在
+            boolean userExist = redisTemplate.hasKey(USER_CHAT_ID_MESSAGE_PREFIX + userId);
+            if(!userExist){
+                // 设置默认channel
+                setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
+            }
             result.put("code", 200);
             result.put("message", "success");
-            // 保存到数据库
-
-            String sql = "SELECT * FROM userInfo WHERE userId = ? AND password = ?";
-
-            List<UserInfo> userList = jdbcTemplate.query(sql, new PreparedStatementSetter() {
-                @Override
-                public void setValues(PreparedStatement preparedStatement) throws SQLException {
-                    preparedStatement.setString(1, userId); // 设置第一个占位符的值为 18
-                    preparedStatement.setString(2, "123456"); // 设置第二个占位符的值为 "Male"
-                }
-            }, new BeanPropertyRowMapper<>(UserInfo.class));
-
-            if(userList == null || userList.size() == 0){
-                jdbcTemplate.execute("INSERT INTO userInfo (userId, password, buy, state) " + "VALUES ('"+ userId +"', '123456', 0, 1);");
-            }
             return result;
         }
     }
@@ -297,10 +310,10 @@ public class ChatController {
     // 删除聊天
     @GetMapping("/deleteHistory")
     @CrossOrigin
-    public Object deleteHistory(String userId) {
+    public Object deleteHistory(String userId, String password) {
         Map<String, Object> result = new HashMap<>();
 
-        if (!checkUser(userId)) {
+        if (!checkUser(userId, password)) {
             result.put("code", 201);
             result.put("message", "删除历史记录失败");
             return result;
@@ -356,15 +369,12 @@ public class ChatController {
         String channelId = (String) param.get("channelId");
         String userId = (String) param.get("userId");
         String prompt = (String) param.get("content");
+        String password = (String) param.get("password");
 
         String clientIP = getClientIP(request);
         log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, EncryptUtils.encrypt(param.toString()));
-
-        if (!checkUser(userId)) {
-            return "error";
-        }
-
-        if("UNAUTHORIZED".equals(userId)){
+        // 是未授权用户或者校验未通过
+        if("UNAUTHORIZED".equals(userId) || !checkUser(userId, password)){
             // 单独处理
             SseEmitter sseEmitter = processUnauthorized(userId, channelId, prompt);
             return sseEmitter;
@@ -618,10 +628,16 @@ public class ChatController {
         return responseString;
     }
 
-    private boolean checkUser(String userId) {
-
-        if (Strings.isEmpty(userId)){
+    private boolean checkUser(String userId, String password) {
+        UserInfo userInfoByUserId = userInfoService.getUserInfoByUserId(userId);
+        if(userInfoByUserId == null){
             return false;
+        }
+        if(userInfoByUserId.getId() >= PRE_MYSQL_ID){
+            UserInfo userInfo = userInfoService.getUserInfoByUserIdAndPass(userId, password);
+            if (userInfo == null){
+                return false;
+            }
         }
         return true;
     }
