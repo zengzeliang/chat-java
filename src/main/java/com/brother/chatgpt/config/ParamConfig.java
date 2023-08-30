@@ -25,4 +25,6 @@ public class ParamConfig {
     private Integer port;
 
     private Integer storeMessage;
+
+    private Integer maxTokenLen;
 }

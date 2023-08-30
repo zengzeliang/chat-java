@@ -36,6 +36,7 @@ public class InitConfig {
     private ChatGPT chatGPT;
     private Integer maxPreContextNum;
     private Integer storeMessage;
+    private Integer maxTokenLen;
 
     public InitConfig(ParamConfig paramConfig){
         this.paramConfig = paramConfig;

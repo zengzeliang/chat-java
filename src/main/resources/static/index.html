@@ -1188,10 +1188,17 @@
     loadChats();
 
     $("#newchat").click(function () {
-        console.log("请输入会话名称");
-        let name = prompt("请输入会话名称");
+        console.log("请输入对话名称");
+        let name = prompt("请输入对话名称");
         if (name === null) {
             return;
+        }
+        while (name.trim() === ""){
+            alert("对话名称不能为空，请重新输入")
+            name = prompt("请输入对话名称");
+            if(name === null){
+                return;
+            }
         }
         let userId = "";
 

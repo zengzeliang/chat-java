@@ -46,13 +46,7 @@ public class ChatController {
     private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
     private UserInfoService userInfoService;
-
-    @Resource
-    private JdbcTemplate jdbcTemplate;
 
     @Resource
     private OkHttpClient okHttpClient;
@@ -421,6 +415,7 @@ public class ChatController {
             listOps.set(USER_CHAT_ID_CHANNEL_PREFIX + userId, index, JSON.toJSONString(targetChannel));
         }
 
+        // 授权后没有normal消息
         if("normal".equals(mode)){
             messages.add(Message.of(prompt));
         }else if("continuous".equals(mode)){
@@ -451,6 +446,9 @@ public class ChatController {
             }
             // 加入当前消息
             messages.add(Message.of(prompt));
+
+            // 判断消息是否大于最大长度，用于截断消息
+            cutMessageLen(messages);
         }
         SseEmitter sseEmitter = new SseEmitter(-1L);
         SseStreamListener listener = new SseStreamListener(sseEmitter);
@@ -466,8 +464,37 @@ public class ChatController {
             return;
         });
         initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
-
         return sseEmitter;
+    }
+
+    private void cutMessageLen(List<Message> messages) {
+        // 获取当前消息的长度
+        int countTokens = ChatCompletion.builder().messages(messages).build().countTokens();
+
+        while (countTokens >= initConfig.getParamConfig().getMaxTokenLen()){
+            // 需要cut的长度为
+            int needCut = countTokens - initConfig.getParamConfig().getMaxTokenLen();
+            // 获取最早的message
+            Message message = messages.get(0);
+            int firstMessageTokens = ChatCompletion.builder().messages(Arrays.asList(message)).build().countTokens();
+
+            if(firstMessageTokens <= needCut){
+                // 第一条消息长度还不够减直接remove
+                if(!messages.isEmpty()){
+                    messages.remove(0);
+                }
+            }else{
+                int temp = firstMessageTokens;
+                // 第一条消息长度够减，尝试减10个
+                while(firstMessageTokens > (temp -needCut)){
+                    String content = message.getContent();
+                    content = content.substring(10);
+                    message.setContent(content);
+                    firstMessageTokens = ChatCompletion.builder().messages(Arrays.asList(message)).build().countTokens();
+                }
+            }
+            countTokens = ChatCompletion.builder().messages(messages).build().countTokens();
+        }
     }
 
     private SseEmitter processUnauthorized(String userId, String channelId, String prompt) {
