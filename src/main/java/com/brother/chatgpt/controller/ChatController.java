@@ -101,15 +101,17 @@ public class ChatController {
     @GetMapping("/deleteMessage")
     @CrossOrigin
     public Object deleteMessage(){
-        String userId = "Spike";
-        String channelId = "f62925d1-1dae-46c1-9eef-c39b6062bcfa";
+        String userId = "zze";
+        String channelId = "default";
         HashOperations<String, String, List<Map<String, String>>> hashOps = redisTemplate.opsForHash();
 
         List<Map<String, String>> messages = hashOps.get(USER_CHAT_ID_MESSAGE_PREFIX + userId, channelId);
 
-        messages.remove(messages.size() - 1);
-        messages.remove(messages.size() - 1);
-        messages.remove(messages.size() - 1);
+        int n = 2;
+
+        for(int i = 0; i < n; i++){
+            messages.remove(messages.size() - 1);
+        }
 
         System.out.println(messages);
 
