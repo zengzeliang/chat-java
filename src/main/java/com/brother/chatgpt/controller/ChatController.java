@@ -490,7 +490,18 @@ public class ChatController {
                 // 第一条消息长度够减，尝试减10个
                 while(firstMessageTokens > (temp -needCut)){
                     String content = message.getContent();
-                    content = content.substring(10);
+                    int remain = needCut - (temp - firstMessageTokens);
+                    if(remain > 4000){
+                        content = content.substring(2000);
+                    }else if(remain > 2000){
+                        content = content.substring(1000);
+                    }else if(remain > 1000){
+                        content = content.substring(500);
+                    }else if(remain > 200){
+                        content = content.substring(100);
+                    }else{
+                        content = content.substring(10);
+                    }
                     message.setContent(content);
                     firstMessageTokens = ChatCompletion.builder().messages(Arrays.asList(message)).build().countTokens();
                 }

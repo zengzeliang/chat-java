@@ -1498,7 +1498,9 @@
             });
         }
 
-        html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + marked.marked(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
+        // html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + marked.marked(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
+        html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + htmlEntities(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
+
         $(".content").append(html);
         $("#textarea").val("");
         $(".content").scrollTop($(".content")[0].scrollHeight);
@@ -1680,7 +1682,7 @@
             return;
         }
         let html = ''
-        html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + marked.marked(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
+        html += '<div class="item item-right"><div class="bubble bubble-right markdown">' + htmlEntities(text) + '</div><div class="avatar"><img src="static/people.jpg" /></div></div>';
         $(".content").append(html);
         $("#textarea").val("");
         $(".content").scrollTop($(".content")[0].scrollHeight);
