@@ -520,6 +520,7 @@ public class ChatController {
         List<Message> messages = new ArrayList<>();
 
         messages.add(Message.of(prompt));
+        cutMessageLen(messages);
         SseEmitter sseEmitter = new SseEmitter(-1L);
         SseStreamListener listener = new SseStreamListener(sseEmitter);
         listener.setOnComplate(msg -> {
