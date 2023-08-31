@@ -21,20 +21,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @RestController
 @Slf4j
@@ -50,6 +48,9 @@ public class ChatController {
 
     @Resource
     private OkHttpClient okHttpClient;
+
+    @Autowired
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     private static final String DEFAULT_CHANNEL_ID = "default";
     private static final String DEFAULT_CHANNEL_NAME = "默认对话";
@@ -468,10 +469,11 @@ public class ChatController {
     }
 
     private void cutMessageLen(List<Message> messages) {
-        // 获取当前消息的长度
-        int countTokens = ChatCompletion.builder().messages(messages).build().countTokens();
+        // 获取当前消息的长度，使用线程池计算
 
-        while (countTokens >= initConfig.getParamConfig().getMaxTokenLen()){
+        int countTokens = concurrentCaculateMessageToken(messages);
+
+        while (countTokens > initConfig.getParamConfig().getMaxTokenLen()){
             // 需要cut的长度为
             int needCut = countTokens - initConfig.getParamConfig().getMaxTokenLen();
             // 获取最早的message
@@ -493,8 +495,25 @@ public class ChatController {
                     firstMessageTokens = ChatCompletion.builder().messages(Arrays.asList(message)).build().countTokens();
                 }
             }
-            countTokens = ChatCompletion.builder().messages(messages).build().countTokens();
+            countTokens = concurrentCaculateMessageToken(messages);
         }
+    }
+
+    // 计算消息长度
+    private int concurrentCaculateMessageToken(List<Message> messages) {
+        // 使用Stream API计算结果的总和
+        int sum = messages.stream()
+                .map(message -> threadPoolTaskExecutor.submit(() -> ChatCompletion.builder().messages(Arrays.asList(message)).build().countTokens()))
+                .mapToInt(future -> {
+                    try {
+                        return future.get();
+                    } catch (Exception e) {
+                        log.error("concurrentCaculateMessageToken messages error: {}", e);
+                        return 0;
+                    }
+                })
+                .sum();
+        return sum;
     }
 
     private SseEmitter processUnauthorized(String userId, String channelId, String prompt) {
