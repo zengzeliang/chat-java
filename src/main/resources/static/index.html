@@ -1325,6 +1325,21 @@
         return messages;
     }
 
+    // 编码html特殊字符
+    function htmlEntities(html) {
+        var escapeMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        };
+
+        return html.replace(/[&<>"']/g, function(match) {
+            return escapeMap[match];
+        });
+    }
+
     function loadHistory() {
         console.log("start load history");
 
@@ -1348,13 +1363,14 @@
                 var html = "";
                 for (var i = 0; i < messages.length; i++) {
                     if (messages[i].role === "user") {
-                        html += '<div class="item item-right"><div class="bubble bubble-right">' + messages[i].content + '</div><div class="avatar"><img src="./static/people.jpg" /></div></div>';
+                        html += '<div class="item item-right"><div class="bubble bubble-right">' + htmlEntities(messages[i].content) + '</div><div class="avatar"><img src="./static/people.jpg" /></div></div>';
                     } else if(messages[i].role === "assistant"){
                         html += '<div class="item item-left"><div class="avatar"><img src="./static/chatgpt.png" /></div><div class="bubble bubble-left markdown">' + marked.marked(messages[i].content) + '</div></div>';
                     } else if (messages[i].role === "web-system") {
                         html += '<div class="item item-center"><span>' + messages[i].content + '</span></div>';
                     }
                 }
+
                 $(".content").append(html);
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, $(".content").get()]);   // 异步转换 放入队列中
                 $(".content").scrollTop($(".content")[0].scrollHeight);
