@@ -550,12 +550,20 @@ public class ChatController {
     @CrossOrigin
     public Object recordMessage(@RequestBody Map<Object, Object> param) {
         String userId = (String) param.get("userId");
+        String msg = (String) param.get("msg");
+        log.info("{}进入recordMessage, msg{}", userId, EncryptUtils.encrypt(msg));
+
+        Map<String, Object> result = new HashMap<>();
+        // 获取用户信息
+        UserInfo userInfoByUserId = userInfoService.getUserInfoByUserId(userId);
+
+        if(userInfoByUserId == null || userInfoByUserId.getBuy() == 0){
+            result.put("code", 200);
+            result.put("message", "用户Id不存在或者用户未购买");
+            return result;
+        }
 
         String channelId = (String) param.get("channelId");
-
-        String msg = (String) param.get("msg");
-
-        log.info("{}进入recordMessage, msg{}", userId, EncryptUtils.encrypt(msg));
 
         Integer messageType = (Integer) param.get("messageType");
 
@@ -568,7 +576,6 @@ public class ChatController {
         }
         recordMessageInfo(userId, channelId, msg, enumValue);
 
-        Map<String, Object> result = new HashMap<>();
         result.put("code", 200);
         result.put("message", "success");
         return result;
