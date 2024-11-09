@@ -69,8 +69,6 @@ public class ChatController {
 
     private static final String IMAGE_OPENAI_URL = "https://api.openai.com/v1/images/generations";
 
-    private static final Integer PRE_MYSQL_ID = 123;
-
     // 非流式 单次聊天调用
     @GetMapping("/chat")
     @CrossOrigin
@@ -700,11 +698,9 @@ public class ChatController {
         if(userInfoByUserId == null){
             return false;
         }
-        if(userInfoByUserId.getId() >= PRE_MYSQL_ID){
-            UserInfo userInfo = userInfoService.getUserInfoByUserIdAndPass(userId, password);
-            if (userInfo == null){
-                return false;
-            }
+        UserInfo userInfo = userInfoService.getUserInfoByUserIdAndPass(userId, password);
+        if (userInfo == null){
+            return false;
         }
         return true;
     }
