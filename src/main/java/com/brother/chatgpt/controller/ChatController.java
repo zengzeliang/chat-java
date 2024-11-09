@@ -447,7 +447,8 @@ public class ChatController {
             recordMessageInfo(userId, channelId, prompt, RecordMessageTypeEnum.USER_TYPE);
             recordMessageInfo(userId, channelId, msg, RecordMessageTypeEnum.ASSISTANT);
 
-            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, EncryptUtils.encrypt(msg));
+//            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, EncryptUtils.encrypt(msg));
+            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, msg);
             return;
         });
         initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
@@ -524,7 +525,8 @@ public class ChatController {
             // 回答完成，可以做一些事情
             sseEmitter.complete();
             // 记录用户问题以及给出的消息
-            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, EncryptUtils.encrypt(msg));
+//            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, EncryptUtils.encrypt(msg));
+            log.info("userId: [{}], channelId[{}]回答完成: {}", userId, channelId, msg);
             return;
         });
         initConfig.getChatGPTStream().streamChatCompletion(messages, listener);
