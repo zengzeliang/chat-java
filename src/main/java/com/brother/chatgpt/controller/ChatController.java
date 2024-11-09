@@ -269,37 +269,25 @@ public class ChatController {
             return result;
         }
 
-        if(userInfoByUserId.getId() >= PRE_MYSQL_ID){
-            // 新版账号
-            // 根据用户名和密码判断是否已经购买
-            UserInfo userInfo = userInfoService.getUserInfoByUserIdAndPass(userId, password);
-            boolean userExist = redisTemplate.hasKey(USER_CHAT_ID_MESSAGE_PREFIX + userId);
-            if(!userExist){
-                // 设置默认channel
-                setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
-            }// 设置默认channel
-            if(userInfo == null){
-                // 查看redis中是否存在
-                result.put("code", 201);
-                result.put("message", "用户信息未查询到");
-            }else{
-                // 查看redis中是否存在
-                result.put("code", 200);
-                result.put("message", "success");
-            }
-            return result;
-
+        // 新版账号
+        // 根据用户名和密码判断是否已经购买
+        UserInfo userInfo = userInfoService.getUserInfoByUserIdAndPass(userId, password);
+        boolean userExist = redisTemplate.hasKey(USER_CHAT_ID_MESSAGE_PREFIX + userId);
+        if(!userExist){
+            // 设置默认channel
+            setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
+        }
+        // 设置默认channel
+        if(userInfo == null){
+            // 查看redis中是否存在
+            result.put("code", 201);
+            result.put("message", "用户信息未查询到");
         }else{
             // 查看redis中是否存在
-            boolean userExist = redisTemplate.hasKey(USER_CHAT_ID_MESSAGE_PREFIX + userId);
-            if(!userExist){
-                // 设置默认channel
-                setChannelInfo(userId, DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_NAME, DEFAULT_CHANNEL_MODE, DEFAULT_CHANNEL_CHAT_MODE);
-            }
             result.put("code", 200);
             result.put("message", "success");
-            return result;
         }
+        return result;
     }
 
     // 删除聊天
