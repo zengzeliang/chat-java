@@ -355,7 +355,8 @@ public class ChatController {
         String password = (String) param.get("password");
 
         String clientIP = getClientIP(request);
-        log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, EncryptUtils.encrypt(param.toString()));
+//        log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, EncryptUtils.encrypt(param.toString()));
+        log.info("user[{}], ip[{}]进入sseChat, channelId: [{}], param: [{}]", userId, clientIP, channelId, param.toString());
         // 是未授权用户或者校验未通过
         if("UNAUTHORIZED".equals(userId) || !checkUser(userId, password)){
             // 单独处理
@@ -539,7 +540,8 @@ public class ChatController {
     public Object recordMessage(@RequestBody Map<Object, Object> param) {
         String userId = (String) param.get("userId");
         String msg = (String) param.get("msg");
-        log.info("{}进入recordMessage, msg{}", userId, EncryptUtils.encrypt(msg));
+//        log.info("{}进入recordMessage, msg{}", userId, EncryptUtils.encrypt(msg));
+        log.info("{}进入recordMessage, msg{}", userId, msg);
 
         Map<String, Object> result = new HashMap<>();
         // 获取用户信息
