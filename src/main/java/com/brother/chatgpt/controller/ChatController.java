@@ -78,7 +78,7 @@ public class ChatController {
         Message message = Message.of(prompt);
 
         ChatCompletion chatCompletion = ChatCompletion.builder()
-                .model(ChatCompletion.Model.GPT_3_5_TURBO.getName())
+                .model(ChatCompletion.Model.GPT_3_5_TURBO)
                 .messages(Arrays.asList(message))
                 .maxTokens(3000)
                 .temperature(0.9)
@@ -453,7 +453,7 @@ public class ChatController {
         }
         SseEmitter sseEmitter = new SseEmitter(-1L);
         SseStreamListener listener = new SseStreamListener(sseEmitter);
-        listener.setOnComplate(msg -> {
+        listener.setOnComplete(msg -> {
             // 回答完成，可以做一些事情
             sseEmitter.complete();
 
@@ -534,7 +534,7 @@ public class ChatController {
         cutMessageLen(messages);
         SseEmitter sseEmitter = new SseEmitter(-1L);
         SseStreamListener listener = new SseStreamListener(sseEmitter);
-        listener.setOnComplate(msg -> {
+        listener.setOnComplete(msg -> {
             // 回答完成，可以做一些事情
             sseEmitter.complete();
             // 记录用户问题以及给出的消息
@@ -656,7 +656,7 @@ public class ChatController {
 
         SseStreamListener listener = new SseStreamListener(sseEmitter);
 
-        listener.setOnComplate(msg -> {
+        listener.setOnComplete(msg -> {
             // 回答完成，可以做一些事情
             sseEmitter.complete();
             log.info("回答完成: {}", msg);
